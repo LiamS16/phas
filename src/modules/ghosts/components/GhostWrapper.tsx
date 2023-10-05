@@ -1,9 +1,11 @@
 import React from "react";
 import type { IGhost } from "~/server/api/data/types";
 import GhostCard from "./GhostCard";
+import type { IMenuEvidence } from "../types/types";
 
 interface IProps {
   ghosts: IGhost[];
+  evidence: IMenuEvidence[];
 }
 
 const GhostWrapper = (props: IProps): JSX.Element => {

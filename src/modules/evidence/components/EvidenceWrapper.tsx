@@ -4,11 +4,14 @@ import {
   CardContent,
   CardTitle,
 } from "~/modules/shad/components/ui/card";
-import type { IEvidence } from "~/server/api/data/types";
 import EvidenceIcon from "./EvidenceIcon";
+import { Checkbox } from "~/modules/shad/components/ui/checkbox";
+import type { IMenuEvidence } from "~/modules/ghosts/types/types";
+import type { evidence } from "~/server/api/data/evidence";
 
 interface IProps {
-  evidence: IEvidence[];
+  evidence: IMenuEvidence[];
+  setEvidence(id: evidence): void;
 }
 
 const EvidenceWrapper = (props: IProps): JSX.Element => {
@@ -17,10 +20,28 @@ const EvidenceWrapper = (props: IProps): JSX.Element => {
       <CardTitle>Evidence</CardTitle>
       <CardContent className="flex flex-col gap-2 px-0">
         {props.evidence.map((e) => (
-          <div className="flex gap-2" key={e.id}>
+          <div
+            className="flex items-center gap-2"
+            key={e.id}
+            style={{
+              color: ["ruled out", "impossible"].includes(e.value)
+                ? "#444"
+                : "",
+            }}
+          >
             <EvidenceIcon {...e} />
-            <h6 className="w-40">{e.name}</h6>
-            <input type="checkbox" />
+            <h6
+              className="w-28"
+              style={{
+                textDecoration: e.value === "ruled out" ? "line-through" : "",
+              }}
+            >
+              {e.name}
+            </h6>
+            <Checkbox
+              checked={e.value === "selected"}
+              onClick={() => props.setEvidence(e.id)}
+            />
           </div>
         ))}
       </CardContent>

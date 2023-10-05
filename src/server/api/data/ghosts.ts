@@ -123,7 +123,7 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.freezing },
       { evidence: E.dots },
     ],
-    name: "Wraith",
+    name: "Oni",
     huntSanity: 50,
     huntSpeed: 1.7,
     behaviourThatExcludes: [B.exhale],

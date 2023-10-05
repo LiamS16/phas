@@ -1,26 +1,22 @@
 import {
-  Book,
   BookOpen,
   Dice2,
   Fingerprint,
   Ghost,
-  Regex,
   SmartphoneCharging,
   ThermometerSnowflake,
   Wifi,
 } from "lucide-react";
 import React from "react";
-import type { IEvidence } from "~/server/api/data/types";
+import type { evidence } from "~/server/api/data/evidence";
 
 interface IProps {
-  evidence: IEvidence;
-  forced?: boolean;
-  hidden?: boolean;
+  id: evidence;
 }
 
 const EvidenceIcon = (props: IProps): JSX.Element => {
   //   return <Wifi className="h-6 w-6 stroke-white" />;
-  switch (props.evidence.id) {
+  switch (props.id) {
     case "dots":
       return <Wifi className="stroke-green-400" />;
     case "emf":

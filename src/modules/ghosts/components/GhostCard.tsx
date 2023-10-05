@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardTitle } from "~/modules/shad/components/ui/card";
 import type { IGhost } from "~/server/api/data/types";
-import EvidenceIcon from "./EvidenceIcon";
+import EvidenceIcon from "../../evidence/components/EvidenceIcon";
 
 const GhostCard = (props: IGhost): JSX.Element => {
   return (
@@ -10,7 +10,7 @@ const GhostCard = (props: IGhost): JSX.Element => {
         <CardTitle>{props.name}</CardTitle>
         <div className="flex w-20 justify-between">
           {props.evidence.map((e) => (
-            <EvidenceIcon {...e} key={e.evidence.id} />
+            <EvidenceIcon id={e.evidence.id} key={e.evidence.id} />
           ))}
         </div>
       </div>

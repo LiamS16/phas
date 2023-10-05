@@ -1,4 +1,7 @@
+import type { evidence } from "./evidence";
+
 export interface IEvidence {
+  id: evidence;
   name: string;
 }
 

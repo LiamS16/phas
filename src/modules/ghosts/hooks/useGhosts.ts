@@ -30,16 +30,13 @@ const useGhosts = (
         .filter((e) => e.value === "ruled out")
         .map((e) => e.id);
 
-      if (confirmedEvidence.length === 0) {
-        setPossibleGhosts(ghosts);
-        return;
-      }
-
       let newGhosts = ghosts;
-
-      for (const e of confirmedEvidence) {
-        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
+      if (confirmedEvidence.length > 0) {
+        for (const e of confirmedEvidence) {
+          newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
+        }
       }
+
       for (const e of ruledOutEvidence) {
         newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
       }

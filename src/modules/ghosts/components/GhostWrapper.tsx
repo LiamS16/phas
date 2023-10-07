@@ -4,6 +4,7 @@ import type { IClientGhost } from "../types/types";
 
 interface IProps {
   ghosts: IClientGhost[];
+  ruleOutGhost(ghostName: string, ruleOut: boolean): void;
 }
 
 const GhostWrapper = (props: IProps): JSX.Element => {
@@ -14,7 +15,8 @@ const GhostWrapper = (props: IProps): JSX.Element => {
       {ghosts
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .map((g) => (
-          <GhostCard ghost={g} key={g.name} />
+          // eslint-disable-next-line @typescript-eslint/unbound-method
+          <GhostCard ghost={g} key={g.name} ruleOutGhost={props.ruleOutGhost} />
         ))}
     </section>
   );

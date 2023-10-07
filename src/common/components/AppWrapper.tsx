@@ -15,12 +15,16 @@ const AppWrapper = (): JSX.Element => {
   );
 
   const [evidence, setEvidence, reRender] = useEvidence(allEvidence.data ?? []);
-  const [ghosts] = useGhosts(allGhosts.data ?? [], evidence, reRender);
+  const [ghosts, ruleOutGhost] = useGhosts(
+    allGhosts.data ?? [],
+    evidence,
+    reRender,
+  );
 
   return (
     <main className="flex h-screen w-screen bg-background">
       <EvidenceWrapper evidence={evidence} setEvidence={setEvidence} />
-      <GhostWrapper ghosts={ghosts} />
+      <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
       <Card className="h-full w-1/4 rounded-none border-y-0 border-r-0 bg-slate-900"></Card>
     </main>
   );

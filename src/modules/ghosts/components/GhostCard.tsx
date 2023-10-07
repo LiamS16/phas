@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -7,16 +7,22 @@ import {
 import EvidenceIcon from "../../evidence/components/EvidenceIcon";
 import { Info, XCircle } from "lucide-react";
 import type { IClientGhost } from "../types/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "~/modules/shad/components/ui/dialog";
 
 interface IProps {
   ghost: IClientGhost;
+  ruleOutGhost(ghostName: string, ruleOut: boolean): void;
 }
 
 const GhostCard = (props: IProps): JSX.Element | null => {
   const { ghost } = props;
 
   const handleRuleOut = () => {
-    // toggleIsRuledOut((prev) => !prev);
+    props.ruleOutGhost(ghost.name, !ghost.ruledOut);
   };
 
   return (
@@ -52,9 +58,14 @@ const GhostCard = (props: IProps): JSX.Element | null => {
         </div>
       </CardContent>
       <div className="-mt-5 flex w-full">
-        <button className="flex w-1/2 items-center justify-center rounded-bl border border-blue-900 bg-blue-900 bg-opacity-10 p-1 shadow shadow-blue-900 transition-opacity hover:bg-opacity-20">
-          <Info className="h-4 w-4 text-blue-600" />
-        </button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="flex w-1/2 items-center justify-center rounded-bl border border-blue-900 bg-blue-900 bg-opacity-10 p-1 shadow shadow-blue-900 transition-opacity hover:bg-opacity-20">
+              <Info className="h-4 w-4 text-blue-600" />
+            </button>
+          </DialogTrigger>
+          <DialogContent></DialogContent>
+        </Dialog>
         <button
           className="flex w-1/2 items-center justify-center rounded-br border border-red-900 bg-red-900 bg-opacity-10 p-1 shadow shadow-red-900"
           onClick={handleRuleOut}

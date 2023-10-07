@@ -7,8 +7,23 @@ const useGhosts = (
   ghosts: IGhost[],
   evidence: IMenuEvidence[],
   reRender: boolean,
-): [IClientGhost[]] => {
+): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
+  const [, triggerReRender] = useState<boolean>(false);
+
+  const ruleOutGhost = (ghostName: string, ruleOut: boolean) => {
+    setPossibleGhosts((prevGhosts) => {
+      for (const g of prevGhosts) {
+        if (g.name === ghostName) {
+          g.ruledOut = ruleOut;
+          break;
+        }
+      }
+      return prevGhosts;
+    });
+
+    triggerReRender((prev) => !prev);
+  };
 
   useEffect(() => {
     // Include passed as true is for confirmed evidence, passed as false is for ruled out evidence
@@ -50,7 +65,7 @@ const useGhosts = (
     filterGhosts();
   }, [evidence, ghosts, reRender]);
 
-  return [possibleGhosts];
+  return [possibleGhosts, ruleOutGhost];
 };
 
 export default useGhosts;

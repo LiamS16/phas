@@ -25,19 +25,13 @@ const EvidenceWrapper = (props: IProps): JSX.Element => {
             key={e.id}
             style={{
               color: ["ruled out", "impossible"].includes(e.value)
-                ? "#444"
+                ? "#666"
                 : "",
+              textDecoration: e.value === "ruled out" ? "line-through" : "",
             }}
           >
             <EvidenceIcon {...e} />
-            <h6
-              className="w-28"
-              style={{
-                textDecoration: e.value === "ruled out" ? "line-through" : "",
-              }}
-            >
-              {e.name}
-            </h6>
+            <h6 className="w-28">{e.name}</h6>
             <Checkbox
               checked={e.value === "selected"}
               onClick={() => props.setEvidence(e.id)}

@@ -1,0 +1,56 @@
+import { useEffect, useState } from "react";
+import type { IGhost } from "~/server/api/data/types";
+import type { IMenuEvidence } from "../types/types";
+import type { evidence } from "~/server/api/data/evidence";
+
+const useGhosts = (
+  ghosts: IGhost[],
+  evidence: IMenuEvidence[],
+  reRender: boolean,
+): [IGhost[]] => {
+  const [possibleGhosts, setPossibleGhosts] = useState<IGhost[]>([]);
+
+  useEffect(() => {
+    // Include passed as true is for confirmed evidence, passed as false is for ruled out evidence
+    const isGhostValid = (
+      g: IGhost,
+      e: evidence,
+      include: boolean,
+    ): boolean => {
+      if (g.evidence.map((ev) => ev.evidence.id).includes(e)) return include;
+      else return !include;
+    };
+
+    const filterGhosts = () => {
+      const confirmedEvidence = evidence
+        .filter((e) => e.value === "selected")
+        .map((e) => e.id);
+
+      const ruledOutEvidence = evidence
+        .filter((e) => e.value === "ruled out")
+        .map((e) => e.id);
+
+      if (confirmedEvidence.length === 0) {
+        setPossibleGhosts(ghosts);
+        return;
+      }
+
+      let newGhosts = ghosts;
+
+      for (const e of confirmedEvidence) {
+        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
+      }
+      for (const e of ruledOutEvidence) {
+        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
+      }
+
+      setPossibleGhosts(newGhosts);
+    };
+
+    filterGhosts();
+  }, [evidence, ghosts, reRender]);
+
+  return [possibleGhosts];
+};
+
+export default useGhosts;

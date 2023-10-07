@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 export const useEvidence = (
   allEvidence: IEvidence[],
-): [IMenuEvidence[], (evidence: evidence) => void] => {
+): [IMenuEvidence[], (evidence: evidence) => void, boolean] => {
   const [possibleEvidence, setPossibleEvidence] = useState<IMenuEvidence[]>([]);
-  const [, triggerReRender] = useState<boolean>(false);
+  const [reRender, triggerReRender] = useState<boolean>(false);
 
   useEffect(() => {
     setPossibleEvidence(allEvidence.map((e) => ({ ...e, value: "possible" })));
@@ -38,5 +38,5 @@ export const useEvidence = (
     triggerReRender((prev) => !prev);
   };
 
-  return [possibleEvidence, toggleEvidence];
+  return [possibleEvidence, toggleEvidence, reRender];
 };

@@ -12,7 +12,7 @@ import EvidenceButton from "./EvidenceButton";
 
 interface IProps {
   evidence: IMenuEvidence[];
-  setEvidence(id: evidence): void;
+  setEvidence(id: evidence, value: IMenuEvidence["value"]): void;
 }
 
 const EvidenceWrapper = (props: IProps): JSX.Element => {

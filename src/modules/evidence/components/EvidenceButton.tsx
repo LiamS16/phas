@@ -5,12 +5,32 @@ import EvidenceIcon from "./EvidenceIcon";
 import { Hand } from "lucide-react";
 
 interface IProps extends IMenuEvidence {
-  toggleEvidence(id: evidence): void;
+  toggleEvidence(id: evidence, value: IMenuEvidence["value"]): void;
 }
 
 const EvidenceButton = (props: IProps): JSX.Element => {
   let classes = "";
   const monkeyPaw = false;
+
+  const handleClick = () => {
+    let val: IMenuEvidence["value"];
+
+    switch (props.value) {
+      case "possible":
+        val = "selected";
+        break;
+      case "ruled out":
+        val = "possible";
+        break;
+      case "selected":
+        val = "ruled out";
+        break;
+      default:
+        val = "possible";
+    }
+
+    props.toggleEvidence(props.id, val);
+  };
 
   switch (props.value) {
     case "impossible":
@@ -30,7 +50,7 @@ const EvidenceButton = (props: IProps): JSX.Element => {
   return (
     <button
       className={`flex items-center gap-2 rounded border px-2 py-1 text-base ${classes}`}
-      onClick={() => props.toggleEvidence(props.id)}
+      onClick={handleClick}
     >
       <EvidenceIcon id={props.id} />
       <span className="w-28 text-left">{props.name}</span>

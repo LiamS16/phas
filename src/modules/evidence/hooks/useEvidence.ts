@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 
 export const useEvidence = (
   allEvidence: IEvidence[],
-): [IMenuEvidence[], (evidence: evidence) => void, boolean] => {
+): [
+  IMenuEvidence[],
+  (id: evidence, value: IMenuEvidence["value"]) => void,
+  boolean,
+] => {
   const [possibleEvidence, setPossibleEvidence] = useState<IMenuEvidence[]>([]);
   const [reRender, triggerReRender] = useState<boolean>(false);
 
@@ -13,23 +17,13 @@ export const useEvidence = (
     setPossibleEvidence(allEvidence.map((e) => ({ ...e, value: "possible" })));
   }, [allEvidence]);
 
-  const toggleEvidence = (id: evidence) => {
+  const toggleEvidence = (id: evidence, value: IMenuEvidence["value"]) => {
     setPossibleEvidence((prev) => {
       const newEv = prev;
 
       newEv.forEach((e) => {
         if (e.id === id) {
-          switch (e.value) {
-            case "possible":
-              e.value = "selected";
-              break;
-            case "ruled out":
-              e.value = "possible";
-              break;
-            case "selected":
-              e.value = "ruled out";
-              break;
-          }
+          e.value = value;
         }
       });
 

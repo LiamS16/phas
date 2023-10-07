@@ -10,7 +10,7 @@ const GhostWrapper = (props: IProps): JSX.Element => {
   const { ghosts } = props;
 
   return (
-    <section className="grid w-1/2 grid-cols-3 gap-4 p-6">
+    <section className="flex grow flex-wrap justify-center gap-4 self-start p-6">
       {ghosts.map((g) => (
         <GhostCard ghost={g} key={g.name} />
       ))}

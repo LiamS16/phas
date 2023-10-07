@@ -12,25 +12,29 @@ import type { evidence } from "~/server/api/data/evidence";
 
 interface IProps {
   id: evidence;
+  className?: string;
 }
 
 const EvidenceIcon = (props: IProps): JSX.Element => {
-  //   return <Wifi className="h-6 w-6 stroke-white" />;
   switch (props.id) {
     case "dots":
-      return <Wifi className="stroke-green-400" />;
+      return <Wifi className={`stroke-green-400 ${props.className}`} />;
     case "emf":
-      return <SmartphoneCharging className="stroke-red-500" />;
+      return (
+        <SmartphoneCharging className={`stroke-red-500 ${props.className}`} />
+      );
     case "freezing":
-      return <ThermometerSnowflake className="stroke-sky-300" />;
+      return (
+        <ThermometerSnowflake className={`stroke-sky-300 ${props.className}`} />
+      );
     case "orbs":
-      return <Dice2 className="stroke-amber-100" />;
+      return <Dice2 className={`stroke-amber-100 ${props.className}`} />;
     case "spirit":
-      return <Ghost className="stroke-orange-500" />;
+      return <Ghost className={`stroke-orange-500 ${props.className}`} />;
     case "uv":
-      return <Fingerprint className="stroke-teal-300" />;
+      return <Fingerprint className={`stroke-teal-300 ${props.className}`} />;
     case "writing":
-      return <BookOpen className="stroke-amber-800" />;
+      return <BookOpen className={`stroke-amber-800 ${props.className}`} />;
   }
 };
 

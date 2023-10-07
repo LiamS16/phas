@@ -8,6 +8,7 @@ import EvidenceIcon from "./EvidenceIcon";
 import { Checkbox } from "~/modules/shad/components/ui/checkbox";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
 import type { evidence } from "~/server/api/data/evidence";
+import EvidenceButton from "./EvidenceButton";
 
 interface IProps {
   evidence: IMenuEvidence[];
@@ -20,23 +21,12 @@ const EvidenceWrapper = (props: IProps): JSX.Element => {
       <CardTitle>Evidence</CardTitle>
       <CardContent className="flex flex-col gap-2 px-0">
         {props.evidence.map((e) => (
-          <div
-            className="flex items-center gap-2"
+          <EvidenceButton
+            {...e}
             key={e.id}
-            style={{
-              color: ["ruled out", "impossible"].includes(e.value)
-                ? "#666"
-                : "",
-              textDecoration: e.value === "ruled out" ? "line-through" : "",
-            }}
-          >
-            <EvidenceIcon {...e} />
-            <h6 className="w-28">{e.name}</h6>
-            <Checkbox
-              checked={e.value === "selected"}
-              onClick={() => props.setEvidence(e.id)}
-            />
-          </div>
+            // eslint-disable-next-line @typescript-eslint/unbound-method
+            toggleEvidence={props.setEvidence}
+          />
         ))}
       </CardContent>
     </Card>

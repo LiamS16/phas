@@ -1,7 +1,7 @@
-import type { IEvidence } from "~/server/api/data/types";
+import type { IEvidence, evidence } from "~/server/api/data/types";
 import type { IMenuEvidence } from "../../ghosts/types/types";
-import type { evidence } from "~/server/api/data/evidence";
 import { useEffect, useState } from "react";
+import { EVIDENCEVALUE } from "~/modules/ghosts/types/evidenceValue";
 
 export const useEvidence = (
   allEvidence: IEvidence[],
@@ -14,7 +14,9 @@ export const useEvidence = (
   const [reRender, triggerReRender] = useState<boolean>(false);
 
   useEffect(() => {
-    setPossibleEvidence(allEvidence.map((e) => ({ ...e, value: "possible" })));
+    setPossibleEvidence(
+      allEvidence.map((e) => ({ ...e, value: EVIDENCEVALUE.POSSIBLE })),
+    );
   }, [allEvidence]);
 
   const toggleEvidence = (id: evidence, value: IMenuEvidence["value"]) => {

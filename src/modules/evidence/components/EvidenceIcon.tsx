@@ -8,11 +8,10 @@ import {
   Wifi,
 } from "lucide-react";
 import React from "react";
-import type { evidence } from "~/server/api/data/evidence";
+import type { evidence } from "~/server/api/data/types";
 
-interface IProps {
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   id: evidence;
-  className?: string;
 }
 
 const EvidenceIcon = (props: IProps): JSX.Element => {

@@ -4,11 +4,9 @@ import {
   CardContent,
   CardTitle,
 } from "~/modules/shad/components/ui/card";
-import EvidenceIcon from "./EvidenceIcon";
-import { Checkbox } from "~/modules/shad/components/ui/checkbox";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
-import type { evidence } from "~/server/api/data/evidence";
 import EvidenceButton from "./EvidenceButton";
+import type { evidence } from "~/server/api/data/types";
 
 interface IProps {
   evidence: IMenuEvidence[];

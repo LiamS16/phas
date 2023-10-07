@@ -1,8 +1,9 @@
 import React from "react";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
-import type { evidence } from "~/server/api/data/evidence";
 import EvidenceIcon from "./EvidenceIcon";
 import { Hand } from "lucide-react";
+import type { evidence } from "~/server/api/data/types";
+import { EVIDENCEVALUE } from "~/modules/ghosts/types/evidenceValue";
 
 interface IProps extends IMenuEvidence {
   toggleEvidence(id: evidence, value: IMenuEvidence["value"]): void;
@@ -16,33 +17,33 @@ const EvidenceButton = (props: IProps): JSX.Element => {
     let val: IMenuEvidence["value"];
 
     switch (props.value) {
-      case "possible":
-        val = "selected";
+      case EVIDENCEVALUE.POSSIBLE:
+        val = EVIDENCEVALUE.SELECTED;
         break;
-      case "ruled out":
-        val = "possible";
+      case EVIDENCEVALUE.RULED_OUT:
+        val = EVIDENCEVALUE.POSSIBLE;
         break;
-      case "selected":
-        val = "ruled out";
+      case EVIDENCEVALUE.SELECTED:
+        val = EVIDENCEVALUE.RULED_OUT;
         break;
       default:
-        val = "possible";
+        val = EVIDENCEVALUE.POSSIBLE;
     }
 
     props.toggleEvidence(props.id, val);
   };
 
   switch (props.value) {
-    case "impossible":
+    case EVIDENCEVALUE.IMPOSSIBLE:
       classes = "border-red-700 bg-red-950";
       break;
-    case "possible":
+    case EVIDENCEVALUE.POSSIBLE:
       classes = "border-slate-600 text-slate-300";
       break;
-    case "ruled out":
+    case EVIDENCEVALUE.RULED_OUT:
       classes = "border-slate-700 bg-slate-950";
       break;
-    case "selected":
+    case EVIDENCEVALUE.SELECTED:
       classes = "border-blue-400 border-2 bg-slate-800";
       break;
   }
@@ -52,7 +53,16 @@ const EvidenceButton = (props: IProps): JSX.Element => {
       className={`flex items-center gap-2 rounded border px-2 py-1 text-base ${classes}`}
       onClick={handleClick}
     >
-      <EvidenceIcon id={props.id} />
+      <EvidenceIcon
+        id={props.id}
+        style={{
+          stroke: [EVIDENCEVALUE.IMPOSSIBLE, EVIDENCEVALUE.RULED_OUT].includes(
+            props.value,
+          )
+            ? "#334155"
+            : "",
+        }}
+      />
       <span className="w-28 text-left">{props.name}</span>
       {monkeyPaw && (
         <Hand className="fill-black stroke-slate-700 hover:cursor-not-allowed" />

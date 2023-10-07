@@ -1,7 +1,8 @@
-import type { evidence } from "~/server/api/data/evidence";
+import type { evidence } from "~/server/api/data/types";
+import type { EVIDENCEVALUE } from "./evidenceValue";
 
 export interface IMenuEvidence {
   id: evidence;
   name: string;
-  value: "selected" | "possible" | "ruled out" | "impossible";
+  value: EVIDENCEVALUE;
 }

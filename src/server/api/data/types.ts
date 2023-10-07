@@ -1,5 +1,3 @@
-import type { evidence } from "./evidence";
-
 export interface IEvidence {
   id: evidence;
   name: string;
@@ -15,6 +13,15 @@ interface IGhostEvidence {
   forced?: boolean;
   hidden?: boolean;
 }
+
+export type evidence =
+  | "dots"
+  | "emf"
+  | "freezing"
+  | "writing"
+  | "spirit"
+  | "uv"
+  | "orbs";
 
 export interface IGhost {
   name: string;

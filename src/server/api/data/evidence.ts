@@ -1,13 +1,4 @@
-import type { IEvidence } from "./types";
-
-export type evidence =
-  | "dots"
-  | "emf"
-  | "freezing"
-  | "writing"
-  | "spirit"
-  | "uv"
-  | "orbs";
+import type { IEvidence, evidence } from "./types";
 
 export const EVIDENCE: Record<evidence, IEvidence> = {
   dots: {

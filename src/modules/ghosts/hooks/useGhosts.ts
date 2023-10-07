@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { IGhost } from "~/server/api/data/types";
+import type { IGhost, evidence } from "~/server/api/data/types";
 import type { IMenuEvidence } from "../types/types";
-import type { evidence } from "~/server/api/data/evidence";
+import { EVIDENCEVALUE } from "../types/evidenceValue";
 
 const useGhosts = (
   ghosts: IGhost[],
@@ -23,11 +23,11 @@ const useGhosts = (
 
     const filterGhosts = () => {
       const confirmedEvidence = evidence
-        .filter((e) => e.value === "selected")
+        .filter((e) => e.value === EVIDENCEVALUE.SELECTED)
         .map((e) => e.id);
 
       const ruledOutEvidence = evidence
-        .filter((e) => e.value === "ruled out")
+        .filter((e) => e.value === EVIDENCEVALUE.RULED_OUT)
         .map((e) => e.id);
 
       let newGhosts = ghosts;

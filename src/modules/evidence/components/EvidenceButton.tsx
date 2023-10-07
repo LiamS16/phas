@@ -41,7 +41,7 @@ const EvidenceButton = (props: IProps): JSX.Element => {
       classes = "border-slate-600 text-slate-300";
       break;
     case EVIDENCEVALUE.RULED_OUT:
-      classes = "border-slate-700 bg-slate-950";
+      classes = "border-slate-700 bg-slate-950 line-through text-slate-700";
       break;
     case EVIDENCEVALUE.SELECTED:
       classes = "border-blue-400 border-2 bg-slate-800";

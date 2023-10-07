@@ -16,7 +16,7 @@ interface IProps {
 const EvidenceWrapper = (props: IProps): JSX.Element => {
   return (
     <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900 p-4">
-      <CardTitle>Evidence</CardTitle>
+      <CardTitle className="pb-2">Evidence</CardTitle>
       <CardContent className="flex flex-col gap-2 px-0">
         {props.evidence.map((e) => (
           <EvidenceButton

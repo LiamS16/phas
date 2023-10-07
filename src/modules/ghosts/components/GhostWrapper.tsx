@@ -11,9 +11,11 @@ const GhostWrapper = (props: IProps): JSX.Element => {
 
   return (
     <section className="flex grow flex-wrap justify-center gap-4 self-start p-6">
-      {ghosts.map((g) => (
-        <GhostCard ghost={g} key={g.name} />
-      ))}
+      {ghosts
+        .sort((a, b) => (a.name > b.name ? 1 : -1))
+        .map((g) => (
+          <GhostCard ghost={g} key={g.name} />
+        ))}
     </section>
   );
 };

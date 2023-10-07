@@ -50,7 +50,7 @@ const EvidenceButton = (props: IProps): JSX.Element => {
 
   return (
     <button
-      className={`flex items-center gap-2 rounded border px-2 py-1 text-base ${classes}`}
+      className={`flex items-center gap-2 rounded border px-3 py-2 text-base ${classes}`}
       onClick={handleClick}
     >
       <EvidenceIcon

@@ -15,7 +15,9 @@ export const useEvidence = (
 
   useEffect(() => {
     setPossibleEvidence(
-      allEvidence.map((e) => ({ ...e, value: EVIDENCEVALUE.POSSIBLE })),
+      allEvidence
+        .sort((a, b) => (a.name > b.name ? 1 : -1))
+        .map((e) => ({ ...e, value: EVIDENCEVALUE.POSSIBLE })),
     );
   }, [allEvidence]);
 
@@ -29,7 +31,7 @@ export const useEvidence = (
         }
       });
 
-      return newEv;
+      return newEv.sort((a, b) => (a.name > b.name ? 1 : -1));
     });
     triggerReRender((prev) => !prev);
   };

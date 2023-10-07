@@ -1,9 +1,9 @@
 import React from "react";
-import type { IGhost } from "~/server/api/data/types";
 import GhostCard from "./GhostCard";
+import type { IClientGhost } from "../types/types";
 
 interface IProps {
-  ghosts: IGhost[];
+  ghosts: IClientGhost[];
 }
 
 const GhostWrapper = (props: IProps): JSX.Element => {

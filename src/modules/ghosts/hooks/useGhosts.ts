@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import type { IGhost, evidence } from "~/server/api/data/types";
-import type { IMenuEvidence } from "../types/types";
+import type { IClientGhost, IMenuEvidence } from "../types/types";
 import { EVIDENCEVALUE } from "../types/evidenceValue";
 
 const useGhosts = (
   ghosts: IGhost[],
   evidence: IMenuEvidence[],
   reRender: boolean,
-): [IGhost[]] => {
-  const [possibleGhosts, setPossibleGhosts] = useState<IGhost[]>([]);
+): [IClientGhost[]] => {
+  const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
 
   useEffect(() => {
     // Include passed as true is for confirmed evidence, passed as false is for ruled out evidence
@@ -30,7 +30,10 @@ const useGhosts = (
         .filter((e) => e.value === EVIDENCEVALUE.RULED_OUT)
         .map((e) => e.id);
 
-      let newGhosts = ghosts;
+      let newGhosts: IClientGhost[] = ghosts.map((g) => ({
+        ...g,
+        ruledOut: false,
+      }));
       if (confirmedEvidence.length > 0) {
         for (const e of confirmedEvidence) {
           newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));

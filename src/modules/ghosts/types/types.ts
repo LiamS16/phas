@@ -10,3 +10,5 @@ export interface IMenuEvidence {
 export interface IClientGhost extends IGhost {
   ruledOut: boolean;
 }
+
+export type GhostSpeed = "fast" | "normal" | "slow" | null;

@@ -17,6 +17,7 @@ const AppWrapper = (): JSX.Element => {
     initData.data?.ghosts ?? [],
     evidence,
     reRender,
+    [null],
   );
 
   return (

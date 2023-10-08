@@ -1,15 +1,14 @@
 import { AccordionItem } from "@radix-ui/react-accordion";
 import React from "react";
 import EvidenceWrapper from "~/modules/evidence/components/EvidenceWrapper";
-import SpeedWrapper from "~/modules/evidence/components/SpeedWrapper";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
 import {
   Accordion,
   AccordionContent,
   AccordionTrigger,
 } from "~/modules/shad/components/ui/accordion";
-import { Button } from "~/modules/shad/components/ui/button";
 import { Card } from "~/modules/shad/components/ui/card";
+import SpeedWrapper from "~/modules/toolbars/components/SpeedWrapper";
 import type { evidence } from "~/server/api/data/types";
 
 interface IProps {
@@ -44,9 +43,6 @@ const LeftColumn = (props: IProps): JSX.Element => {
           <AccordionTrigger>Tells</AccordionTrigger>
         </AccordionItem>
       </Accordion>
-      <div className="flex w-full items-center justify-center p-3">
-        <button className="rounded border border-white px-5 py-1">Reset</button>
-      </div>
     </Card>
   );
 };

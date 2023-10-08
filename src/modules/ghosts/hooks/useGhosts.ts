@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import type { IGhost, evidence } from "~/server/api/data/types";
-import type { IClientGhost, IMenuEvidence } from "../types/types";
+import type { GhostSpeed, IClientGhost, IMenuEvidence } from "../types/types";
 import { EVIDENCEVALUE } from "../types/evidenceValue";
 
 const useGhosts = (
   ghosts: IGhost[],
   evidence: IMenuEvidence[],
   reRender: boolean,
+  speed: GhostSpeed[],
 ): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
   const [, triggerReRender] = useState<boolean>(false);

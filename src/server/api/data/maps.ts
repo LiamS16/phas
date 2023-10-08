@@ -1,6 +1,6 @@
 import { type IMap, size } from "./types";
 
-export const maps: IMap[] = [
+export const MAPS: IMap[] = [
   {
     name: "10 Ridgeview Court",
     size: size.SMALL,

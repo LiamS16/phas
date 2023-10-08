@@ -1,7 +1,11 @@
 import { AccordionItem } from "@radix-ui/react-accordion";
 import React from "react";
 import EvidenceWrapper from "~/modules/evidence/components/EvidenceWrapper";
-import type { IMenuEvidence } from "~/modules/ghosts/types/types";
+import type {
+  GhostSpeed,
+  IGhostSpeed,
+  IMenuEvidence,
+} from "~/modules/ghosts/types/types";
 import {
   Accordion,
   AccordionContent,
@@ -14,6 +18,8 @@ import type { evidence } from "~/server/api/data/types";
 interface IProps {
   evidence: IMenuEvidence[];
   setEvidence(id: evidence, value: IMenuEvidence["value"]): void;
+  speed: IGhostSpeed;
+  toggleGhostSpeed(speed: GhostSpeed): void;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
@@ -33,7 +39,11 @@ const LeftColumn = (props: IProps): JSX.Element => {
         <AccordionItem value="speed" className="w-48 px-3">
           <AccordionTrigger>Speed</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
-            <SpeedWrapper />
+            <SpeedWrapper
+              speed={props.speed}
+              // eslint-disable-next-line @typescript-eslint/unbound-method
+              toggleGhostSpeed={props.toggleGhostSpeed}
+            />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="sanity" className="w-48 px-3">

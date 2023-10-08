@@ -11,4 +11,9 @@ export interface IClientGhost extends IGhost {
   ruledOut: boolean;
 }
 
-export type GhostSpeed = "fast" | "normal" | "slow" | null;
+export type GhostSpeed = "fast" | "normal" | "slow";
+
+export type IGhostSpeed = Record<
+  GhostSpeed,
+  { name: GhostSpeed; selected: boolean }
+>;

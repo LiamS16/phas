@@ -1,12 +1,11 @@
 import React from "react";
 import GhostWrapper from "~/modules/ghosts/components/GhostWrapper";
-import { Card } from "~/modules/shad/components/ui/card";
 import { api } from "~/utils/api";
 import { queryOptions } from "../constants/query";
 import { useEvidence } from "~/modules/evidence/hooks/useEvidence";
 import useGhosts from "~/modules/ghosts/hooks/useGhosts";
-import LeftColumn from "./LeftColumn";
-import RightColumn from "./RightColumn";
+import LeftColumn from "../../modules/toolbars/components/LeftColumn";
+import RightColumn from "../../modules/toolbars/components/RightColumn";
 
 const AppWrapper = (): JSX.Element => {
   const allGhosts = api.ghost.getAllGhosts.useQuery(undefined, queryOptions);

@@ -1,6 +1,7 @@
 import { AccordionItem } from "@radix-ui/react-accordion";
 import React from "react";
 import EvidenceWrapper from "~/modules/evidence/components/EvidenceWrapper";
+import SpeedWrapper from "~/modules/evidence/components/SpeedWrapper";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
 import {
   Accordion,
@@ -17,10 +18,10 @@ interface IProps {
 
 const LeftColumn = (props: IProps): JSX.Element => {
   return (
-    <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900">
+    <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900 px-1">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="evidence">
-          <AccordionTrigger className="w-48 px-4">Evidence</AccordionTrigger>
+          <AccordionTrigger className="w-48 px-3">Evidence</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
             <EvidenceWrapper
               evidence={props.evidence}
@@ -29,13 +30,16 @@ const LeftColumn = (props: IProps): JSX.Element => {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="speed" className="w-48 px-4">
+        <AccordionItem value="speed" className="w-48 px-3">
           <AccordionTrigger>Speed</AccordionTrigger>
+          <AccordionContent className="rounded bg-slate-950 p-2">
+            <SpeedWrapper />
+          </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="sanity" className="w-48 px-4">
+        <AccordionItem value="sanity" className="w-48 px-3">
           <AccordionTrigger>Hunt Sanity</AccordionTrigger>
         </AccordionItem>
-        <AccordionItem value="tells" className="w-48 px-4">
+        <AccordionItem value="tells" className="w-48 px-3">
           <AccordionTrigger>Tells</AccordionTrigger>
         </AccordionItem>
       </Accordion>

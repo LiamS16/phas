@@ -41,16 +41,18 @@ const GhostCard = (props: IProps): JSX.Element | null => {
             <EvidenceIcon
               id={e.evidence.id}
               key={e.evidence.id}
-              className="h-4 w-4"
+              className="h-3 w-3"
               style={{
-                stroke: ghost.ruledOut ? "rgb(71, 85, 105)" : "",
+                stroke: ghost.ruledOut
+                  ? "rgb(71, 85, 105)"
+                  : "rgb(148, 163, 184)",
               }}
             />
           ))}
         </div>
         <div
           className={`flex gap-2 whitespace-nowrap text-center text-sm ${
-            ghost.ruledOut ? "text-slate-600" : ""
+            ghost.ruledOut ? "text-slate-600" : "text-slate-400"
           }`}
         >
           <p>{ghost.huntSanity?.toString().replace(",", " - ")}%</p>

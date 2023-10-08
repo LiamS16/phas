@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardTitle,
-} from "~/modules/shad/components/ui/card";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
 import EvidenceButton from "./EvidenceButton";
 import type { evidence } from "~/server/api/data/types";
@@ -15,19 +10,16 @@ interface IProps {
 
 const EvidenceWrapper = (props: IProps): JSX.Element => {
   return (
-    <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900 p-4">
-      <CardTitle className="pb-2">Evidence</CardTitle>
-      <CardContent className="flex flex-col gap-2 px-0">
-        {props.evidence.map((e) => (
-          <EvidenceButton
-            {...e}
-            key={e.id}
-            // eslint-disable-next-line @typescript-eslint/unbound-method
-            toggleEvidence={props.setEvidence}
-          />
-        ))}
-      </CardContent>
-    </Card>
+    <div className="-mb-4 flex flex-col gap-2 py-2">
+      {props.evidence.map((e) => (
+        <EvidenceButton
+          {...e}
+          key={e.id}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
+          toggleEvidence={props.setEvidence}
+        />
+      ))}
+    </div>
   );
 };
 

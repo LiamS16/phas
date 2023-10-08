@@ -103,7 +103,7 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.freezing },
     ],
     name: "Demon",
-    huntSanity: 100,
+    huntSanity: 70,
     huntSpeed: 1.7,
     behaviourThatReveals: B.lowIncense,
   },
@@ -219,7 +219,7 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.orbs, hidden, forced },
     ],
     name: "The Mimic",
-    huntSanity: 100,
+    huntSanity: 75,
     huntSpeed: [0.4, 3.71],
   },
   moroi: {

@@ -12,7 +12,6 @@ export const useTimer = (
   startTimer: () => void;
   isCounting: boolean;
   endTimer: () => void;
-  pauseTimer: () => void;
 } => {
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [timeDelta, setTimeDelta] = useState<number | null>(null);
@@ -24,10 +23,6 @@ export const useTimer = (
     now = now.add(seconds + 1, "seconds");
     setEndDate(now);
     toggleIsCounting(true);
-  };
-
-  const pauseTimer = () => {
-    toggleIsCounting(false);
   };
 
   const endTimer = () => {
@@ -58,7 +53,6 @@ export const useTimer = (
     endTimer,
     expires: timeDelta ?? null,
     isCounting,
-    pauseTimer,
     startTimer,
   };
 };

@@ -3,8 +3,9 @@ import CountDown from "./CountDown";
 
 const TimerWrapper = (): JSX.Element => {
   return (
-    <div className="w-full">
-      <CountDown seconds={10} />
+    <div className="-mb-2 w-full">
+      <CountDown seconds={90} title="Smudge" />
+      <CountDown seconds={25} title="Hunt Cooldown" />
     </div>
   );
 };

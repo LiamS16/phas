@@ -10,7 +10,7 @@ import TimerWrapper from "~/modules/timers/components/TimerWrapper";
 
 const RightColumn = (): JSX.Element => {
   return (
-    <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900">
+    <Card className="h-full rounded-none border-y-0 border-l-0 bg-slate-900 px-1">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="evidence">
           <AccordionTrigger className="w-48 px-4">Timers</AccordionTrigger>

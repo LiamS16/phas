@@ -34,3 +34,14 @@ export interface IGhost {
   behaviourThatReveals?: IBehaviour;
   huntTraits?: IBehaviour[];
 }
+
+export enum size {
+  SMALL,
+  MEDIUM,
+  LARGE,
+}
+export interface IMap {
+  name: string;
+  size: size;
+  url: string;
+}

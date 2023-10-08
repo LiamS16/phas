@@ -7,28 +7,44 @@ dayjs.extend(utc);
 
 export const useTimer = (
   seconds: number,
-): [expires: number | null, () => void] => {
+): {
+  expires: number | null;
+  startTimer: () => void;
+  isCounting: boolean;
+  endTimer: () => void;
+  pauseTimer: () => void;
+} => {
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [timeDelta, setTimeDelta] = useState<number | null>(null);
   const [isCounting, toggleIsCounting] = useState<boolean>(false);
+  const [, triggerReRender] = useState<boolean>(false);
 
   const startTimer = () => {
-    const now = dayjs().utc();
-    now.add(seconds, "seconds");
+    let now = dayjs().utc();
+    now = now.add(seconds + 1, "seconds");
     setEndDate(now);
     toggleIsCounting(true);
   };
 
+  const pauseTimer = () => {
+    toggleIsCounting(false);
+  };
+
+  const endTimer = () => {
+    toggleIsCounting(false);
+    setTimeDelta(null);
+  };
+
   useEffect(() => {
     const timeDeltaUpdate = () => {
-      if (!isCounting) return;
+      if (!isCounting || endDate === null) return;
 
-      const delta = endDate?.millisecond() ?? 0 - new Date().getTime();
+      const delta = endDate.unix() * 1000 - new Date().getTime();
 
-      if (delta !== null && delta < 1) {
-        toggleIsCounting(false);
-        setTimeDelta(null);
-      } else setTimeDelta(delta);
+      if (delta < 1) endTimer();
+      else setTimeDelta(delta);
+
+      triggerReRender((prev) => !prev);
     };
 
     const timeDeltaUpdateInterval = setInterval(timeDeltaUpdate, 1000);
@@ -38,5 +54,11 @@ export const useTimer = (
     };
   }, [endDate, isCounting]);
 
-  return [timeDelta, startTimer];
+  return {
+    endTimer,
+    expires: timeDelta ?? null,
+    isCounting,
+    pauseTimer,
+    startTimer,
+  };
 };

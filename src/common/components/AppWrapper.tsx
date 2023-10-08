@@ -8,15 +8,13 @@ import LeftColumn from "../../modules/toolbars/components/LeftColumn";
 import RightColumn from "../../modules/toolbars/components/RightColumn";
 
 const AppWrapper = (): JSX.Element => {
-  const allGhosts = api.ghost.getAllGhosts.useQuery(undefined, queryOptions);
-  const allEvidence = api.ghost.getAllEvidence.useQuery(
-    undefined,
-    queryOptions,
-  );
+  const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
 
-  const [evidence, setEvidence, reRender] = useEvidence(allEvidence.data ?? []);
+  const [evidence, setEvidence, reRender] = useEvidence(
+    initData.data?.evidence ?? [],
+  );
   const [ghosts, ruleOutGhost] = useGhosts(
-    allGhosts.data ?? [],
+    initData.data?.ghosts ?? [],
     evidence,
     reRender,
   );

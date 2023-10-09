@@ -4,24 +4,21 @@ import type { GhostSpeed, IGhostSpeed } from "~/modules/ghosts/types/types";
 
 interface IProps {
   speed: IGhostSpeed;
-  toggleGhostSpeed(speed: GhostSpeed): void;
+  toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
 }
 
 const SpeedWrapper = (props: IProps): JSX.Element => {
-  const speeds: GhostSpeed[] = ["fast", "normal", "slow"];
-
-  const handleSpeedClick = (speed: GhostSpeed): void => {
-    props.toggleGhostSpeed(speed);
-  };
-
   return (
     <div className="-mb-4 flex flex-col gap-2 py-2">
       <div className="flex flex-col">
-        {speeds.map((speed) => (
+        {Object.values(props.speed).map((speed) => (
           <MenuCheckbox
-            key={speed}
-            title={speed ?? ""}
-            onClick={() => handleSpeedClick(speed)}
+            key={speed.name}
+            title={speed.name}
+            // eslint-disable-next-line @typescript-eslint/unbound-method
+            toggleGhostSpeed={props.toggleGhostSpeed}
+            active={speed.selected}
+            val={speed.id}
           />
         ))}
       </div>

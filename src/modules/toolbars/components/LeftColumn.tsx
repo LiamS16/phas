@@ -19,7 +19,7 @@ interface IProps {
   evidence: IMenuEvidence[];
   setEvidence(id: evidence, value: IMenuEvidence["value"]): void;
   speed: IGhostSpeed;
-  toggleGhostSpeed(speed: GhostSpeed): void;
+  toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {

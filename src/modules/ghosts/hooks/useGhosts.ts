@@ -64,7 +64,7 @@ const useGhosts = (
     };
 
     filterGhosts();
-  }, [evidence, ghosts, reRender]);
+  }, [evidence, ghosts, reRender, speed]);
 
   return [possibleGhosts, ruleOutGhost];
 };

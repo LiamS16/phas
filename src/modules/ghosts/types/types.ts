@@ -15,5 +15,5 @@ export type GhostSpeed = "fast" | "normal" | "slow";
 
 export type IGhostSpeed = Record<
   GhostSpeed,
-  { name: GhostSpeed; selected: boolean }
+  { name: string; selected: boolean; id: GhostSpeed }
 >;

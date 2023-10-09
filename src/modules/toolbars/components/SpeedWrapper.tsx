@@ -9,8 +9,8 @@ interface IProps {
 
 const SpeedWrapper = (props: IProps): JSX.Element => {
   return (
-    <div className="-mb-4 flex flex-col gap-2 py-2">
-      <div className="flex flex-col">
+    <div className="-mb-4 flex w-full flex-col gap-2 py-2">
+      <div className="flex flex-col gap-2">
         {Object.values(props.speed).map((speed) => (
           <MenuCheckbox
             key={speed.name}

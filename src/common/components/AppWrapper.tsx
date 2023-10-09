@@ -11,14 +11,15 @@ import { useSpeed } from "~/modules/evidence/hooks/useSpeed";
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
 
-  const [evidence, setEvidence, reRender] = useEvidence(
+  const [evidence, setEvidence, evidenceReRender] = useEvidence(
     initData.data?.evidence ?? [],
   );
-  const [ghostSpeed, setGhostSpeed] = useSpeed();
+  const [ghostSpeed, speedReRender, setGhostSpeed] = useSpeed();
   const [ghosts, ruleOutGhost] = useGhosts(
     initData.data?.ghosts ?? [],
     evidence,
-    reRender,
+    evidenceReRender,
+    speedReRender,
     ghostSpeed,
   );
 

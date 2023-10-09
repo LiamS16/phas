@@ -1,9 +1,9 @@
 import {
   BookOpen,
-  Dice2,
   Fingerprint,
-  Ghost,
-  SmartphoneCharging,
+  Mic,
+  ParkingMeter,
+  Regex,
   ThermometerSnowflake,
   Wifi,
 } from "lucide-react";
@@ -25,7 +25,7 @@ const EvidenceIcon = (props: IProps): JSX.Element => {
       );
     case "emf":
       return (
-        <SmartphoneCharging
+        <ParkingMeter
           className={`stroke-red-500 ${props.className}`}
           style={props.style}
         />
@@ -39,14 +39,14 @@ const EvidenceIcon = (props: IProps): JSX.Element => {
       );
     case "orbs":
       return (
-        <Dice2
+        <Regex
           className={`stroke-amber-200 ${props.className}`}
           style={props.style}
         />
       );
     case "spirit":
       return (
-        <Ghost
+        <Mic
           className={`stroke-orange-500 ${props.className}`}
           style={props.style}
         />

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import type { IGhost, evidence } from "~/server/api/data/types";
 import type { IClientGhost, IGhostSpeed, IMenuEvidence } from "../types/types";
 import { EVIDENCEVALUE } from "../types/evidenceValue";
+import { ghostSpeedFilter } from "../utils/speedUtils";
 
 const useGhosts = (
   ghosts: IGhost[],
   evidence: IMenuEvidence[],
-  reRender: boolean,
+  ghostReRender: boolean,
+  speedReRender: boolean,
   speed: IGhostSpeed,
 ): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
@@ -60,11 +62,18 @@ const useGhosts = (
         newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
       }
 
+      for (const s of Object.values(speed)) {
+        if (!s.selected) continue;
+
+        newGhosts = newGhosts.filter((g) => ghostSpeedFilter(g, s));
+      }
+
       setPossibleGhosts(newGhosts);
+      triggerReRender((prev) => !prev);
     };
 
     filterGhosts();
-  }, [evidence, ghosts, reRender, speed]);
+  }, [evidence, ghosts, ghostReRender, speedReRender, speed]);
 
   return [possibleGhosts, ruleOutGhost];
 };

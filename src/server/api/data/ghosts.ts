@@ -14,7 +14,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Spirit",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   wraith: {
     evidence: [
@@ -24,7 +24,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Wraith",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   phantom: {
     evidence: [
@@ -34,7 +34,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Phantom",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   polter: {
     evidence: [
@@ -44,13 +44,13 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Poltergeist",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   banshee: {
     evidence: [{ evidence: E.uv }, { evidence: E.orbs }, { evidence: E.dots }],
     name: "Banshee",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
     description: "Targets specific player",
   },
   jinn: {
@@ -71,8 +71,8 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.writing },
     ],
     name: "Mare",
-    huntSanity: [60, 40],
-    huntSpeed: 1.7,
+    huntSanity: 60,
+    huntSpeed: [1.7],
   },
   rev: {
     evidence: [
@@ -93,7 +93,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Shade",
     huntSanity: 35,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
     behaviourThatExcludes: [B.huntsWPlayerInRoom],
   },
   demon: {
@@ -104,7 +104,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Demon",
     huntSanity: 70,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
     behaviourThatReveals: B.lowIncense,
   },
   yurei: {
@@ -115,7 +115,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Yurei",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   oni: {
     evidence: [
@@ -125,7 +125,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Oni",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
     behaviourThatExcludes: [B.exhale],
   },
   yokai: {
@@ -136,7 +136,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Yokai",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
     behaviourThatReveals: B.huntWhenTalking,
   },
   hantu: {
@@ -147,7 +147,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Hantu",
     huntSanity: 50,
-    huntSpeed: [1.7, 2.7],
+    huntSpeed: [1.4, 2.7],
     behaviourThatExcludes: [B.turnOnBreaker],
     huntTraits: [B.speedsUpInCold],
   },
@@ -159,7 +159,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Goryo",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   myling: {
     evidence: [
@@ -169,7 +169,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Myling",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   onryo: {
     evidence: [
@@ -179,7 +179,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Onryo",
     huntSanity: 60,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   twins: {
     evidence: [
@@ -209,7 +209,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Obake",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [1.7],
   },
   mimic: {
     evidence: [
@@ -240,7 +240,7 @@ export const GHOSTS: Record<string, IGhost> = {
     ],
     name: "Deogen",
     huntSanity: 50,
-    huntSpeed: 1.7,
+    huntSpeed: [0.4, 3],
   },
   thaye: {
     evidence: [

@@ -13,7 +13,11 @@ export interface IClientGhost extends IGhost {
 
 export type GhostSpeed = "fast" | "normal" | "slow";
 
-export type IGhostSpeed = Record<
-  GhostSpeed,
-  { name: string; selected: boolean; id: GhostSpeed }
->;
+export interface IGhostSpeedKey {
+  name: string;
+  selected: boolean;
+  id: GhostSpeed;
+  speedRange: [number, number];
+}
+
+export type IGhostSpeed = Record<GhostSpeed, IGhostSpeedKey>;

@@ -14,7 +14,9 @@ const MenuCheckbox = (props: IProps): JSX.Element => {
   return (
     <button
       className={`flex items-center gap-2 rounded border px-3 py-2 text-base ${
-        props.active && "border-blue-500"
+        props.active
+          ? "box-border border-2 border-blue-400 bg-slate-800"
+          : "border-slate-600 text-slate-300"
       } ${props.className}`}
       style={{ stroke: props.active ? "#334155" : "" }}
       // eslint-disable-next-line @typescript-eslint/unbound-method

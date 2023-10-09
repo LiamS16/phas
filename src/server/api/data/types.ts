@@ -26,8 +26,8 @@ export type evidence =
 export interface IGhost {
   name: string;
   evidence: IGhostEvidence[];
-  huntSpeed?: number | [number, number];
-  huntSanity?: number | [number, number];
+  huntSpeed: [number] | [number, number];
+  huntSanity: number;
   description?: string;
   behaviourThatExcludes?: IBehaviour[];
   behaviourThatIncludes?: IBehaviour[];

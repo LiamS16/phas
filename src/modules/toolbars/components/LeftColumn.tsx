@@ -36,8 +36,8 @@ const LeftColumn = (props: IProps): JSX.Element => {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="speed" className="w-48 px-3">
-          <AccordionTrigger>Speed</AccordionTrigger>
+        <AccordionItem value="speed">
+          <AccordionTrigger className="w-48 px-3">Speed</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
             <SpeedWrapper
               speed={props.speed}

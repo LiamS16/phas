@@ -35,7 +35,7 @@ const EvidenceButton = (props: IProps): JSX.Element => {
 
   switch (props.value) {
     case EVIDENCEVALUE.IMPOSSIBLE:
-      classes = "border-red-700 bg-red-950";
+      classes = "border-slate-800 bg-black text-slate-800";
       break;
     case EVIDENCEVALUE.POSSIBLE:
       classes = "border-slate-600 text-slate-300";

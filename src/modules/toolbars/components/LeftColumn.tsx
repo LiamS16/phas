@@ -35,6 +35,8 @@ interface IProps {
   sanity: ISanity;
   setSanity(sanity: SanityKey, value: SecondaryEvidenceValue): void;
   handleReset(): void;
+  numOfEvidence: number;
+  setNumOfEvidence(val: number): void;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
@@ -43,7 +45,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
       <Accordion
         type="single"
         collapsible
-        className="mt-1 h-[calc(100%-6.25rem)] w-full rounded border"
+        className="mt-1 h-[calc(100%-6.25rem)] w-full overflow-y-auto rounded border"
         defaultValue="evidence"
       >
         <AccordionItem value="evidence">
@@ -53,6 +55,9 @@ const LeftColumn = (props: IProps): JSX.Element => {
               evidence={props.evidence}
               // eslint-disable-next-line @typescript-eslint/unbound-method
               setEvidence={props.setEvidence}
+              numOfEvidence={props.numOfEvidence}
+              // eslint-disable-next-line @typescript-eslint/unbound-method
+              setNumOfEvidence={props.setNumOfEvidence}
             />
           </AccordionContent>
         </AccordionItem>

@@ -8,8 +8,12 @@ import {
 export const useSpeed = (): {
   ghostSpeed: IGhostSpeed;
   speedReRender: boolean;
-  setGhostSpeed(speed: GhostSpeed, value: SecondaryEvidenceValue): void;
-  resetGhostSpeed(): void;
+  setGhostSpeed(
+    this: void,
+    speed: GhostSpeed,
+    value: SecondaryEvidenceValue,
+  ): void;
+  resetGhostSpeed(this: void): void;
 } => {
   const [reRender, triggerReRender] = useState<boolean>(false);
   const [speed, setSpeed] = useState<IGhostSpeed>({

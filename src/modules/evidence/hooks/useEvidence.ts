@@ -10,9 +10,12 @@ export const useEvidence = (
   setEvidence: (id: evidence, value: IMenuEvidence["value"]) => void;
   evidenceReRender: boolean;
   resetEvidence(): void;
+  numOfEvidence: number;
+  setNumOfEvidence(val: number): void;
 } => {
   const [possibleEvidence, setPossibleEvidence] = useState<IMenuEvidence[]>([]);
   const [reRender, triggerReRender] = useState<boolean>(false);
+  const [numOfEvidence, setNumOfEvidence] = useState<number>(3);
 
   useEffect(() => {
     setPossibleEvidence(
@@ -21,6 +24,33 @@ export const useEvidence = (
         .map((e) => ({ ...e, value: EVIDENCEVALUE.POSSIBLE })),
     );
   }, [allEvidence]);
+
+  useEffect(() => {
+    if (numOfEvidence === 0) {
+      const filter = (prev: IMenuEvidence[]) => {
+        for (const e of prev) {
+          if (e.id !== "orbs") e.value = EVIDENCEVALUE.IMPOSSIBLE;
+        }
+
+        return prev;
+      };
+
+      setPossibleEvidence((prev) => filter(prev));
+      triggerReRender((p) => !p);
+    } else {
+      const filter = (prev: IMenuEvidence[]) => {
+        for (const e of prev) {
+          if (e.value === EVIDENCEVALUE.IMPOSSIBLE)
+            e.value = EVIDENCEVALUE.POSSIBLE;
+        }
+
+        return prev;
+      };
+
+      setPossibleEvidence((p) => filter(p));
+      triggerReRender((p) => !p);
+    }
+  }, [numOfEvidence]);
 
   const toggleEvidence = function (
     id: evidence,
@@ -51,5 +81,7 @@ export const useEvidence = (
     setEvidence: toggleEvidence,
     evidenceReRender: reRender,
     resetEvidence,
+    setNumOfEvidence,
+    numOfEvidence,
   };
 };

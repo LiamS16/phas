@@ -12,9 +12,16 @@ import { useSanity } from "~/modules/evidence/hooks/useSanity";
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
 
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { evidence, setEvidence, evidenceReRender, resetEvidence } =
-    useEvidence(initData.data?.evidence ?? []);
+  const {
+    evidence,
+    setEvidence,
+    evidenceReRender,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    resetEvidence,
+    numOfEvidence,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    setNumOfEvidence,
+  } = useEvidence(initData.data?.evidence ?? []);
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { sanity, updateSanity, reRender, resetSanity } = useSanity();
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -48,6 +55,8 @@ const AppWrapper = (): JSX.Element => {
           sanity={sanity}
           setSanity={updateSanity}
           handleReset={handleReset}
+          numOfEvidence={numOfEvidence}
+          setNumOfEvidence={setNumOfEvidence}
         />
         <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
       </main>

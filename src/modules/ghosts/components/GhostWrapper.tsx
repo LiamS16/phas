@@ -11,12 +11,16 @@ const GhostWrapper = (props: IProps): JSX.Element => {
   const { ghosts } = props;
 
   return (
-    <section className="flex grow flex-wrap justify-center gap-4 self-start p-6">
+    <section className="flex max-h-full grow flex-wrap justify-center gap-4 self-start overflow-auto p-6">
       {ghosts
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .map((g) => (
-          // eslint-disable-next-line @typescript-eslint/unbound-method
-          <GhostCard ghost={g} key={g.name} ruleOutGhost={props.ruleOutGhost} />
+          <GhostCard
+            ghost={g}
+            key={g.name}
+            // eslint-disable-next-line @typescript-eslint/unbound-method
+            ruleOutGhost={props.ruleOutGhost}
+          />
         ))}
     </section>
   );

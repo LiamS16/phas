@@ -26,8 +26,12 @@ interface IProps {
 
 const LeftColumn = (props: IProps): JSX.Element => {
   return (
-    <Card className="flex h-full flex-col justify-between rounded-none border-y-0 border-l-0 bg-slate-900 px-1">
-      <Accordion type="single" collapsible className="w-full">
+    <Card className="flex h-full flex-col rounded-none border-y-0 border-l-0 bg-slate-900 px-1">
+      <Accordion
+        type="single"
+        collapsible
+        className="h-[calc(100%-6rem)] w-full"
+      >
         <AccordionItem value="evidence">
           <AccordionTrigger className="w-48 px-3">Evidence</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
@@ -68,21 +72,9 @@ const LeftColumn = (props: IProps): JSX.Element => {
         Map <Maximize className="h-4 w-4" />
       </button>
       <div className="grow" />
-      <div className="flex w-full items-center justify-center gap-2 p-3">
-        {/* <Dialog defaultOpen>
-          <DialogTrigger asChild>
-            <button className="rounded border border-white px-3 py-1">
-              Initialize
-            </button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>Initialize</DialogHeader>
-          </DialogContent>
-        </Dialog> */}
-        <button className="rounded bg-white px-3 py-1 text-slate-900">
-          Reset
-        </button>
-      </div>
+      <button className="mx-3 rounded bg-white px-3 py-1 text-slate-900">
+        Reset
+      </button>
     </Card>
   );
 };

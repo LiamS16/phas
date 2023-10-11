@@ -6,6 +6,7 @@ import { useEvidence } from "~/modules/evidence/hooks/useEvidence";
 import useGhosts from "~/modules/ghosts/hooks/useGhosts";
 import LeftColumn from "../../modules/toolbars/components/LeftColumn";
 import { useSpeed } from "~/modules/evidence/hooks/useSpeed";
+import Div100vh from "react-div-100vh";
 
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
@@ -23,15 +24,17 @@ const AppWrapper = (): JSX.Element => {
   );
 
   return (
-    <main className="flex h-screen w-screen bg-black">
-      <LeftColumn
-        evidence={evidence}
-        speed={ghostSpeed}
-        setEvidence={setEvidence}
-        toggleGhostSpeed={setGhostSpeed}
-      />
-      <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
-    </main>
+    <Div100vh>
+      <main className="flex h-full w-screen bg-black">
+        <LeftColumn
+          evidence={evidence}
+          speed={ghostSpeed}
+          setEvidence={setEvidence}
+          toggleGhostSpeed={setGhostSpeed}
+        />
+        <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
+      </main>
+    </Div100vh>
   );
 };
 

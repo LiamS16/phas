@@ -66,7 +66,42 @@ const GhostCard = (props: IProps): JSX.Element | null => {
               <Info className="h-4 w-4 text-blue-600" />
             </button>
           </DialogTrigger>
-          <DialogContent></DialogContent>
+          <DialogContent>
+            <div className="flex justify-between">
+              <h1 className="text-lg">{ghost.name}</h1>
+              <div className="mr-4 flex gap-1">
+                {ghost.evidence.map((e) => (
+                  <EvidenceIcon
+                    id={e.evidence.id}
+                    key={e.evidence.id}
+                    className="h-5 w-5"
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="flex flex-col">
+                <h2>Hunt Sanity:</h2>
+                <p className="text-sm">{ghost.huntSanity}</p>
+              </div>
+              <div className="flex flex-col">
+                <h2>Hunt Speed:</h2>
+                <p className="text-sm">
+                  {ghost.huntSpeed.toString().replace(",", " - ")}
+                </p>
+              </div>
+            </div>
+            <h2>Tells:</h2>
+            <p className="-mt-4 text-sm">{ghost.tells}</p>
+            {ghost.huntsAt && (
+              <>
+                <h2>Hunts At:</h2>
+                <p className="-mt-4 text-sm">{ghost.huntsAt}</p>
+              </>
+            )}
+            <h2>Description</h2>
+            <p className="-mt-4 text-sm">{ghost.description}</p>
+          </DialogContent>
         </Dialog>
         <button
           className="flex w-1/2 items-center justify-center rounded-br border border-red-900 bg-red-900 bg-opacity-10 p-1 shadow shadow-red-900"

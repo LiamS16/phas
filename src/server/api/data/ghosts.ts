@@ -234,7 +234,7 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.dots },
     ],
     name: "Deogen",
-    huntSanity: 50,
+    huntSanity: 40,
     huntSpeed: [0.4, 3],
   },
   thaye: {

@@ -40,6 +40,16 @@ export const useSanity = (): {
 
   const updateSanity = (sanity: SanityKey, value: SecondaryEvidenceValue) => {
     const update = (prev: ISanity) => {
+      for (const s of Object.values(prev)) {
+        const val = s.selected;
+
+        if (val === SecondaryEvidenceValue.IMPOSSIBLE) continue;
+
+        if (sanity === s.id && value === SecondaryEvidenceValue.SELECTED)
+          prev[s.id].selected = SecondaryEvidenceValue.SELECTED;
+        else prev[s.id].selected = SecondaryEvidenceValue.POSSIBLE;
+      }
+
       prev[sanity].selected = value;
       return prev;
     };

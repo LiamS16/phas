@@ -6,6 +6,8 @@ export const ghostSpeedFilter = (g: IGhost, s: IGhostSpeedKey): boolean => {
 
   for (const speed of g.huntSpeed) {
     if (speed > s.speedRange[0] && speed < s.speedRange[1]) isPossible = true;
+    else if (speed < s.speedRange[1] && speed > s.speedRange[0])
+      isPossible = true;
   }
 
   return isPossible;

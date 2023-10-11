@@ -21,3 +21,20 @@ export interface IGhostSpeedKey {
 }
 
 export type IGhostSpeed = Record<GhostSpeed, IGhostSpeedKey>;
+
+export enum SecondaryEvidenceValue {
+  POSSIBLE,
+  SELECTED,
+  IMPOSSIBLE,
+}
+
+export interface IGhostSanity {
+  name: string;
+  selected: SecondaryEvidenceValue;
+  minValue: number;
+}
+
+export type ISanity = Record<
+  "late" | "normal" | "early" | "veryEarly",
+  IGhostSanity
+>;

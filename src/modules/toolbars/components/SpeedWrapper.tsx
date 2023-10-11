@@ -1,6 +1,6 @@
 import React from "react";
-import MenuCheckbox from "./MenuCheckbox";
 import type { GhostSpeed, IGhostSpeed } from "~/modules/ghosts/types/types";
+import SpeedButton from "./SpeedButton";
 
 interface IProps {
   speed: IGhostSpeed;
@@ -12,7 +12,7 @@ const SpeedWrapper = (props: IProps): JSX.Element => {
     <div className="-mb-4 flex w-full flex-col gap-2 py-2">
       <div className="flex flex-col gap-2">
         {Object.values(props.speed).map((speed) => (
-          <MenuCheckbox
+          <SpeedButton
             key={speed.name}
             title={speed.name}
             // eslint-disable-next-line @typescript-eslint/unbound-method

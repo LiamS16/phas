@@ -1,11 +1,11 @@
 import { AccordionItem } from "@radix-ui/react-accordion";
-import { Maximize } from "lucide-react";
 import React from "react";
 import EvidenceWrapper from "~/modules/evidence/components/EvidenceWrapper";
 import type {
   GhostSpeed,
   IGhostSpeed,
   IMenuEvidence,
+  ISanity,
 } from "~/modules/ghosts/types/types";
 import {
   Accordion,
@@ -16,12 +16,14 @@ import { Card } from "~/modules/shad/components/ui/card";
 import TimerWrapper from "~/modules/timers/components/TimerWrapper";
 import SpeedWrapper from "~/modules/toolbars/components/SpeedWrapper";
 import type { evidence } from "~/server/api/data/types";
+import SanityWrapper from "./SanityWrapper";
 
 interface IProps {
   evidence: IMenuEvidence[];
   setEvidence(id: evidence, value: IMenuEvidence["value"]): void;
   speed: IGhostSpeed;
   toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
+  sanity: ISanity;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
@@ -30,7 +32,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
       <Accordion
         type="single"
         collapsible
-        className="h-[calc(100%-6rem)] w-full"
+        className="h-[calc(100%-5.5rem)] w-full"
       >
         <AccordionItem value="evidence">
           <AccordionTrigger className="w-48 px-3">Evidence</AccordionTrigger>
@@ -54,6 +56,9 @@ const LeftColumn = (props: IProps): JSX.Element => {
         </AccordionItem>
         <AccordionItem value="sanity">
           <AccordionTrigger className="w-48 px-3">Hunt Sanity</AccordionTrigger>
+          <AccordionContent className="rounded bg-slate-950 p-2">
+            <SanityWrapper sanity={props.sanity} />
+          </AccordionContent>
         </AccordionItem>
         <AccordionItem value="timers">
           <AccordionTrigger className="w-48 px-3">Timers</AccordionTrigger>
@@ -67,12 +72,13 @@ const LeftColumn = (props: IProps): JSX.Element => {
           </AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2"></AccordionContent>
         </AccordionItem>
+        <AccordionItem value="maps">
+          <AccordionTrigger className="w-48 px-3">Maps</AccordionTrigger>
+          <AccordionContent className="rounded bg-slate-950 p-2"></AccordionContent>
+        </AccordionItem>
       </Accordion>
-      <button className="m-3 flex items-center justify-center gap-2 rounded border border-white px-5 py-1">
-        Map <Maximize className="h-4 w-4" />
-      </button>
       <div className="grow" />
-      <button className="mx-3 rounded bg-white px-3 py-1 text-slate-900">
+      <button className="mx-3 mb-3 rounded bg-white px-3 py-1 text-slate-900">
         Reset
       </button>
     </Card>

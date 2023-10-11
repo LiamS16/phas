@@ -10,7 +10,7 @@ interface IProps {
   val: GhostSpeed;
 }
 
-const MenuCheckbox = (props: IProps): JSX.Element => {
+const SpeedButton = (props: IProps): JSX.Element => {
   return (
     <button
       className={`flex items-center gap-2 rounded border px-3 py-2 text-base ${
@@ -28,4 +28,4 @@ const MenuCheckbox = (props: IProps): JSX.Element => {
   );
 };
 
-export default MenuCheckbox;
+export default SpeedButton;

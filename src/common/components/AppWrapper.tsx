@@ -7,6 +7,7 @@ import useGhosts from "~/modules/ghosts/hooks/useGhosts";
 import LeftColumn from "../../modules/toolbars/components/LeftColumn";
 import { useSpeed } from "~/modules/evidence/hooks/useSpeed";
 import Div100vh from "react-div-100vh";
+import { useSanity } from "~/modules/evidence/hooks/useSanity";
 
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
@@ -14,6 +15,7 @@ const AppWrapper = (): JSX.Element => {
   const [evidence, setEvidence, evidenceReRender] = useEvidence(
     initData.data?.evidence ?? [],
   );
+  const { sanity } = useSanity();
   const [ghostSpeed, speedReRender, setGhostSpeed] = useSpeed();
   const [ghosts, ruleOutGhost] = useGhosts(
     initData.data?.ghosts ?? [],
@@ -31,6 +33,7 @@ const AppWrapper = (): JSX.Element => {
           speed={ghostSpeed}
           setEvidence={setEvidence}
           toggleGhostSpeed={setGhostSpeed}
+          sanity={sanity}
         />
         <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
       </main>

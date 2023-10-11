@@ -12,15 +12,15 @@ import { useSanity } from "~/modules/evidence/hooks/useSanity";
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
 
-  const { evidence, setEvidence, evidenceReRender } = useEvidence(
-    initData.data?.evidence ?? [],
-  );
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { sanity, updateSanity, reRender } = useSanity();
+  const { evidence, setEvidence, evidenceReRender, resetEvidence } =
+    useEvidence(initData.data?.evidence ?? []);
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { sanity, updateSanity, reRender, resetSanity } = useSanity();
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { ghostSpeed, resetGhostSpeed, setGhostSpeed, speedReRender } =
     useSpeed();
-  const [ghosts, ruleOutGhost] = useGhosts({
+  const [ghosts, ruleOutGhost, resetGhosts] = useGhosts({
     evidence,
     ghostReRender: evidenceReRender,
     speedReRender,
@@ -29,6 +29,13 @@ const AppWrapper = (): JSX.Element => {
     sanityReRender: reRender,
     sanity,
   });
+
+  const handleReset = () => {
+    resetEvidence();
+    resetGhostSpeed();
+    resetGhosts();
+    resetSanity();
+  };
 
   return (
     <Div100vh>
@@ -40,6 +47,7 @@ const AppWrapper = (): JSX.Element => {
           toggleGhostSpeed={setGhostSpeed}
           sanity={sanity}
           setSanity={updateSanity}
+          handleReset={handleReset}
         />
         <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
       </main>

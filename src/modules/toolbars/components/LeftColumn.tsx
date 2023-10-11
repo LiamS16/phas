@@ -27,6 +27,7 @@ interface IProps {
   toggleGhostSpeed(speed: GhostSpeed, value: SecondaryEvidenceValue): void;
   sanity: ISanity;
   setSanity(sanity: SanityKey, value: SecondaryEvidenceValue): void;
+  handleReset(): void;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
@@ -82,7 +83,11 @@ const LeftColumn = (props: IProps): JSX.Element => {
         </AccordionItem>
       </Accordion>
       <div className="grow" />
-      <button className="mx-3 mb-3 rounded bg-white px-3 py-1 text-slate-900">
+      <button
+        className="mx-3 mb-3 rounded bg-white px-3 py-1 text-slate-900"
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        onClick={props.handleReset}
+      >
         Reset
       </button>
     </Card>

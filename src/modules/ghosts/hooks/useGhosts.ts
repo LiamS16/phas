@@ -18,7 +18,11 @@ const useGhosts = (args: {
   sanityReRender: boolean;
   speed: IGhostSpeed;
   sanity: ISanity;
-}): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
+}): [
+  IClientGhost[],
+  (ghostName: string, ruleOut: boolean) => void,
+  () => void,
+] => {
   const {
     evidence,
     ghostReRender,
@@ -43,6 +47,11 @@ const useGhosts = (args: {
       return prevGhosts;
     });
 
+    triggerReRender((prev) => !prev);
+  };
+
+  const resetGhosts = () => {
+    setPossibleGhosts(ghosts.map((g) => ({ ...g, ruledOut: false })));
     triggerReRender((prev) => !prev);
   };
 
@@ -108,7 +117,7 @@ const useGhosts = (args: {
     sanity,
   ]);
 
-  return [possibleGhosts, ruleOutGhost];
+  return [possibleGhosts, ruleOutGhost, resetGhosts];
 };
 
 export default useGhosts;

@@ -43,7 +43,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
       <Accordion
         type="single"
         collapsible
-        className="mt-1 h-[calc(100%-5.5rem)] w-full rounded border"
+        className="mt-1 h-[calc(100%-6.25rem)] w-full rounded border"
         defaultValue="evidence"
       >
         <AccordionItem value="evidence">
@@ -98,7 +98,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
       >
         Reset
       </button>
-      <p className="my-1 text-center text-xs text-blue-400">Version 0.1.0</p>
+      <p className="my-1 text-center text-xs text-blue-400">Version 0.1.1</p>
       <Dialog>
         <DialogTrigger asChild>
           <button className="mx-auto mb-3 flex items-center justify-center gap-2 text-sm hover:text-slate-400">

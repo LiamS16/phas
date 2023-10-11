@@ -28,7 +28,9 @@ export interface IGhost {
   huntSpeed: [number] | [number, number];
   huntSanity: number;
   maxHuntSanity?: number;
-  description?: string;
+  description: string;
+  tells: string;
+  huntsAt?: string;
 }
 
 export enum size {

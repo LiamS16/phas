@@ -2,6 +2,11 @@ import React from "react";
 import type { IMenuEvidence } from "~/modules/ghosts/types/types";
 import EvidenceButton from "./EvidenceButton";
 import type { evidence } from "~/server/api/data/types";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+} from "~/modules/shad/components/ui/select";
 
 interface IProps {
   evidence: IMenuEvidence[];
@@ -11,6 +16,14 @@ interface IProps {
 const EvidenceWrapper = (props: IProps): JSX.Element => {
   return (
     <div className="-mb-4 flex flex-col gap-2 py-2">
+      <div className="flex items-center justify-between">
+        <p>Evidence</p>
+        <Select>
+          <SelectTrigger className="w-12">
+            <SelectValue />
+          </SelectTrigger>
+        </Select>
+      </div>
       {props.evidence.map((e) => (
         <EvidenceButton
           {...e}

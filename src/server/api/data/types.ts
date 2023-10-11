@@ -11,7 +11,6 @@ export interface IBehaviour {
 interface IGhostEvidence {
   evidence: IEvidence;
   forced?: boolean;
-  hidden?: boolean;
 }
 
 export type evidence =
@@ -28,11 +27,8 @@ export interface IGhost {
   evidence: IGhostEvidence[];
   huntSpeed: [number] | [number, number];
   huntSanity: number;
+  maxHuntSanity?: number;
   description?: string;
-  behaviourThatExcludes?: IBehaviour[];
-  behaviourThatIncludes?: IBehaviour[];
-  behaviourThatReveals?: IBehaviour;
-  huntTraits?: IBehaviour[];
 }
 
 export enum size {

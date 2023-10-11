@@ -1,9 +1,7 @@
-import { BEHAVIOUR as B } from "./behaviour";
 import { EVIDENCE as E } from "./evidence";
 import { type IGhost } from "./types";
 
 const forced = true;
-const hidden = true;
 
 export const GHOSTS: Record<string, IGhost> = {
   spirit: {
@@ -52,6 +50,7 @@ export const GHOSTS: Record<string, IGhost> = {
     huntSanity: 50,
     huntSpeed: [1.7],
     description: "Targets specific player",
+    maxHuntSanity: 87,
   },
   jinn: {
     evidence: [
@@ -62,7 +61,6 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Jinn",
     huntSanity: 50,
     huntSpeed: [1.7, 2.5],
-    behaviourThatExcludes: [B.turnOffBreaker],
   },
   mare: {
     evidence: [
@@ -83,7 +81,6 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Revenant",
     huntSanity: 50,
     huntSpeed: [1, 3],
-    huntTraits: [B.speedsUpNearPlayer],
   },
   shade: {
     evidence: [
@@ -94,7 +91,6 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Shade",
     huntSanity: 35,
     huntSpeed: [1.7],
-    behaviourThatExcludes: [B.huntsWPlayerInRoom],
   },
   demon: {
     evidence: [
@@ -105,7 +101,7 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Demon",
     huntSanity: 70,
     huntSpeed: [1.7],
-    behaviourThatReveals: B.lowIncense,
+    maxHuntSanity: 100,
   },
   yurei: {
     evidence: [
@@ -126,7 +122,6 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Oni",
     huntSanity: 50,
     huntSpeed: [1.7],
-    behaviourThatExcludes: [B.exhale],
   },
   yokai: {
     evidence: [
@@ -137,7 +132,7 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Yokai",
     huntSanity: 50,
     huntSpeed: [1.7],
-    behaviourThatReveals: B.huntWhenTalking,
+    maxHuntSanity: 80,
   },
   hantu: {
     evidence: [
@@ -148,8 +143,6 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Hantu",
     huntSanity: 50,
     huntSpeed: [1.4, 2.7],
-    behaviourThatExcludes: [B.turnOnBreaker],
-    huntTraits: [B.speedsUpInCold],
   },
   goryo: {
     evidence: [
@@ -180,6 +173,7 @@ export const GHOSTS: Record<string, IGhost> = {
     name: "Onryo",
     huntSanity: 60,
     huntSpeed: [1.7],
+    maxHuntSanity: 100,
   },
   twins: {
     evidence: [
@@ -216,11 +210,12 @@ export const GHOSTS: Record<string, IGhost> = {
       { evidence: E.spirit },
       { evidence: E.uv },
       { evidence: E.freezing },
-      { evidence: E.orbs, hidden, forced },
+      { evidence: E.orbs, forced },
     ],
     name: "The Mimic",
-    huntSanity: 75,
+    huntSanity: 50,
     huntSpeed: [0.4, 3.71],
+    maxHuntSanity: 100,
   },
   moroi: {
     evidence: [

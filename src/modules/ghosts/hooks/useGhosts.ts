@@ -88,7 +88,9 @@ const useGhosts = (args: {
 
       for (const s of Object.values(sanity)) {
         if (s.selected === SecondaryEvidenceValue.SELECTED)
-          newGhosts = newGhosts.filter((g) => g.huntSanity > s.minValue);
+          newGhosts = newGhosts.filter(
+            (g) => (g.maxHuntSanity ?? g.huntSanity) > s.minValue,
+          );
       }
 
       setPossibleGhosts(newGhosts);

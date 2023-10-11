@@ -25,20 +25,22 @@ const EvidenceWrapper = (props: IProps): JSX.Element => {
   return (
     <div className="-mb-4 flex flex-col gap-2 py-2">
       <h2>Number of evidence:</h2>
-      <Select
-        value={props.numOfEvidence.toString()}
-        onValueChange={(e) => handleChange(e)}
-      >
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="3">3</SelectItem>
-          <SelectItem value="2">2</SelectItem>
-          <SelectItem value="1">1</SelectItem>
-          <SelectItem value="0">0</SelectItem>
-        </SelectContent>
-      </Select>
+      {true ? null : (
+        <Select
+          value={props.numOfEvidence.toString()}
+          onValueChange={(e) => handleChange(e)}
+        >
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="3">3</SelectItem>
+            <SelectItem value="2">2</SelectItem>
+            <SelectItem value="1">1</SelectItem>
+            <SelectItem value="0">0</SelectItem>
+          </SelectContent>
+        </Select>
+      )}
       {props.evidence.map((e) => (
         <EvidenceButton
           {...e}

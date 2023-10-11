@@ -6,6 +6,8 @@ import type {
   IGhostSpeed,
   IMenuEvidence,
   ISanity,
+  SanityKey,
+  SecondaryEvidenceValue,
 } from "~/modules/ghosts/types/types";
 import {
   Accordion,
@@ -24,6 +26,7 @@ interface IProps {
   speed: IGhostSpeed;
   toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
   sanity: ISanity;
+  setSanity(sanity: SanityKey, value: SecondaryEvidenceValue): void;
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
@@ -57,7 +60,8 @@ const LeftColumn = (props: IProps): JSX.Element => {
         <AccordionItem value="sanity">
           <AccordionTrigger className="w-48 px-3">Hunt Sanity</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
-            <SanityWrapper sanity={props.sanity} />
+            {/* eslint-disable-next-line @typescript-eslint/unbound-method */}
+            <SanityWrapper sanity={props.sanity} setSanity={props.setSanity} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="timers">

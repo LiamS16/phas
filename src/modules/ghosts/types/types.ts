@@ -28,13 +28,11 @@ export enum SecondaryEvidenceValue {
   IMPOSSIBLE,
 }
 
+export type SanityKey = "late" | "normal" | "early" | "veryEarly";
 export interface IGhostSanity {
   name: string;
   selected: SecondaryEvidenceValue;
   minValue: number;
+  id: SanityKey;
 }
-
-export type ISanity = Record<
-  "late" | "normal" | "early" | "veryEarly",
-  IGhostSanity
->;
+export type ISanity = Record<SanityKey, IGhostSanity>;

@@ -15,15 +15,18 @@ const AppWrapper = (): JSX.Element => {
   const [evidence, setEvidence, evidenceReRender] = useEvidence(
     initData.data?.evidence ?? [],
   );
-  const { sanity } = useSanity();
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { sanity, updateSanity, reRender } = useSanity();
   const [ghostSpeed, speedReRender, setGhostSpeed] = useSpeed();
-  const [ghosts, ruleOutGhost] = useGhosts(
-    initData.data?.ghosts ?? [],
+  const [ghosts, ruleOutGhost] = useGhosts({
     evidence,
-    evidenceReRender,
+    ghostReRender: evidenceReRender,
     speedReRender,
-    ghostSpeed,
-  );
+    speed: ghostSpeed,
+    ghosts: initData.data?.ghosts ?? [],
+    sanityReRender: reRender,
+    sanity,
+  });
 
   return (
     <Div100vh>
@@ -34,6 +37,7 @@ const AppWrapper = (): JSX.Element => {
           setEvidence={setEvidence}
           toggleGhostSpeed={setGhostSpeed}
           sanity={sanity}
+          setSanity={updateSanity}
         />
         <GhostWrapper ghosts={ghosts} ruleOutGhost={ruleOutGhost} />
       </main>

@@ -1,16 +1,34 @@
 import { useEffect, useState } from "react";
 import type { IGhost, evidence } from "~/server/api/data/types";
-import type { IClientGhost, IGhostSpeed, IMenuEvidence } from "../types/types";
+import {
+  SecondaryEvidenceValue,
+  type IClientGhost,
+  type IGhostSpeed,
+  type IMenuEvidence,
+  type ISanity,
+} from "../types/types";
 import { EVIDENCEVALUE } from "../types/evidenceValue";
 import { ghostSpeedFilter } from "../utils/speedUtils";
 
-const useGhosts = (
-  ghosts: IGhost[],
-  evidence: IMenuEvidence[],
-  ghostReRender: boolean,
-  speedReRender: boolean,
-  speed: IGhostSpeed,
-): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
+const useGhosts = (args: {
+  ghosts: IGhost[];
+  evidence: IMenuEvidence[];
+  ghostReRender: boolean;
+  speedReRender: boolean;
+  sanityReRender: boolean;
+  speed: IGhostSpeed;
+  sanity: ISanity;
+}): [IClientGhost[], (ghostName: string, ruleOut: boolean) => void] => {
+  const {
+    evidence,
+    ghostReRender,
+    ghosts,
+    sanityReRender,
+    speed,
+    speedReRender,
+    sanity,
+  } = args;
+
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
   const [, triggerReRender] = useState<boolean>(false);
 
@@ -68,12 +86,25 @@ const useGhosts = (
         newGhosts = newGhosts.filter((g) => ghostSpeedFilter(g, s));
       }
 
+      for (const s of Object.values(sanity)) {
+        if (s.selected === SecondaryEvidenceValue.SELECTED)
+          newGhosts = newGhosts.filter((g) => g.huntSanity > s.minValue);
+      }
+
       setPossibleGhosts(newGhosts);
       triggerReRender((prev) => !prev);
     };
 
     filterGhosts();
-  }, [evidence, ghosts, ghostReRender, speedReRender, speed]);
+  }, [
+    evidence,
+    ghosts,
+    ghostReRender,
+    speedReRender,
+    speed,
+    sanityReRender,
+    sanity,
+  ]);
 
   return [possibleGhosts, ruleOutGhost];
 };

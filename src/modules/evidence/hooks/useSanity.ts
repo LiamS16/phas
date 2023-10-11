@@ -9,6 +9,7 @@ export const useSanity = (): {
   sanity: ISanity;
   updateSanity(sanity: SanityKey, value: SecondaryEvidenceValue): void;
   reRender: boolean;
+  resetSanity(): void;
 } => {
   const [reRender, triggerReRender] = useState<boolean>(false);
   const [sanity, setSanity] = useState<ISanity>({
@@ -58,5 +59,17 @@ export const useSanity = (): {
     triggerReRender((prev) => !prev);
   };
 
-  return { sanity, updateSanity, reRender };
+  const resetSanity = () => {
+    const reset = (prev: ISanity) => {
+      for (const s of Object.values(prev)) {
+        prev[s.id].selected = SecondaryEvidenceValue.POSSIBLE;
+      }
+
+      return prev;
+    };
+
+    setSanity((prev) => reset(prev));
+  };
+
+  return { sanity, updateSanity, reRender, resetSanity };
 };

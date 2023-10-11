@@ -15,7 +15,7 @@ export type GhostSpeed = "fast" | "normal" | "slow";
 
 export interface IGhostSpeedKey {
   name: string;
-  selected: boolean;
+  selected: SecondaryEvidenceValue;
   id: GhostSpeed;
   speedRange: [number, number];
 }

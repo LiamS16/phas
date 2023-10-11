@@ -24,7 +24,7 @@ interface IProps {
   evidence: IMenuEvidence[];
   setEvidence(id: evidence, value: IMenuEvidence["value"]): void;
   speed: IGhostSpeed;
-  toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
+  toggleGhostSpeed(speed: GhostSpeed, value: SecondaryEvidenceValue): void;
   sanity: ISanity;
   setSanity(sanity: SanityKey, value: SecondaryEvidenceValue): void;
 }

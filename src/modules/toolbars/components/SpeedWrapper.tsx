@@ -1,10 +1,14 @@
 import React from "react";
-import type { GhostSpeed, IGhostSpeed } from "~/modules/ghosts/types/types";
+import type {
+  GhostSpeed,
+  IGhostSpeed,
+  SecondaryEvidenceValue,
+} from "~/modules/ghosts/types/types";
 import SpeedButton from "./SpeedButton";
 
 interface IProps {
   speed: IGhostSpeed;
-  toggleGhostSpeed(speed: GhostSpeed, value: boolean): void;
+  toggleGhostSpeed(speed: GhostSpeed, value: SecondaryEvidenceValue): void;
 }
 
 const SpeedWrapper = (props: IProps): JSX.Element => {

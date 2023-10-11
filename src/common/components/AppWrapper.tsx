@@ -12,12 +12,14 @@ import { useSanity } from "~/modules/evidence/hooks/useSanity";
 const AppWrapper = (): JSX.Element => {
   const initData = api.ghost.getInitData.useQuery(undefined, queryOptions);
 
-  const [evidence, setEvidence, evidenceReRender] = useEvidence(
+  const { evidence, setEvidence, evidenceReRender } = useEvidence(
     initData.data?.evidence ?? [],
   );
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { sanity, updateSanity, reRender } = useSanity();
-  const [ghostSpeed, speedReRender, setGhostSpeed] = useSpeed();
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { ghostSpeed, resetGhostSpeed, setGhostSpeed, speedReRender } =
+    useSpeed();
   const [ghosts, ruleOutGhost] = useGhosts({
     evidence,
     ghostReRender: evidenceReRender,

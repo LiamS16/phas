@@ -5,11 +5,12 @@ import { EVIDENCEVALUE } from "~/modules/ghosts/types/evidenceValue";
 
 export const useEvidence = (
   allEvidence: IEvidence[],
-): [
-  IMenuEvidence[],
-  (id: evidence, value: IMenuEvidence["value"]) => void,
-  boolean,
-] => {
+): {
+  evidence: IMenuEvidence[];
+  setEvidence: (id: evidence, value: IMenuEvidence["value"]) => void;
+  evidenceReRender: boolean;
+  resetEvidence(): void;
+} => {
   const [possibleEvidence, setPossibleEvidence] = useState<IMenuEvidence[]>([]);
   const [reRender, triggerReRender] = useState<boolean>(false);
 
@@ -39,5 +40,16 @@ export const useEvidence = (
     triggerReRender((prev) => !prev);
   };
 
-  return [possibleEvidence, toggleEvidence, reRender];
+  const resetEvidence = () => {
+    setPossibleEvidence((prev) =>
+      prev.map((e) => ({ ...e, value: EVIDENCEVALUE.POSSIBLE })),
+    );
+  };
+
+  return {
+    evidence: possibleEvidence,
+    setEvidence: toggleEvidence,
+    evidenceReRender: reRender,
+    resetEvidence,
+  };
 };

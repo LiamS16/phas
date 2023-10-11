@@ -18,7 +18,7 @@ export const useSpeed = (): [
     slow: { name: "Slow", selected: false, id: "slow", speedRange: [0, 1.6] },
   });
 
-  const speedToggle = (speed: GhostSpeed, value: boolean) => {
+  const speedToggle = function (speed: GhostSpeed, value: boolean) {
     setSpeed((prev) => {
       prev[speed].selected = value;
       return prev;

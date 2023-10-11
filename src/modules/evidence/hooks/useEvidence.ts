@@ -21,7 +21,10 @@ export const useEvidence = (
     );
   }, [allEvidence]);
 
-  const toggleEvidence = (id: evidence, value: IMenuEvidence["value"]) => {
+  const toggleEvidence = function (
+    id: evidence,
+    value: IMenuEvidence["value"],
+  ) {
     setPossibleEvidence((prev) => {
       const newEv = prev;
 

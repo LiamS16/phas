@@ -14,7 +14,7 @@ const useGhosts = (
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
   const [, triggerReRender] = useState<boolean>(false);
 
-  const ruleOutGhost = (ghostName: string, ruleOut: boolean) => {
+  const ruleOutGhost = function (ghostName: string, ruleOut: boolean) {
     setPossibleGhosts((prevGhosts) => {
       for (const g of prevGhosts) {
         if (g.name === ghostName) {

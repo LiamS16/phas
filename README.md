@@ -1,28 +1,29 @@
-# Create T3 App
+# Phas Guide
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Companion website for the popular horror game Phasmophobia.
 
-## What's next? How do I make an app with this?
+## Table of Contents
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- [Project Description](#project-description)
+- [Features](#features)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Project Description
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+This project was inspired by Ty Bayn's [Phasmo Cheat Sheet](https://github.com/tybayn/phasmo-cheat-sheet). I wanted to create a similar application, but with a better UX.
 
-## Learn More
+## Features
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- Accurate evidence selection.
+  - Include forced/hidden evidence i.e. Mimics hidden Ghost Orb evidence.
+  - Nightmare, Insanity, and 0 evidence W.I.P.
+- Sanity and speed modifiers
+- Maps (W.I.P.)
+- Cursed Possession Guide (W.I.P.)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## License
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+[GNU APGLv3](https://choosealicense.com/licenses/agpl-3.0/)
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Acknowledgments

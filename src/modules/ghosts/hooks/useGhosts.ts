@@ -8,7 +8,7 @@ import {
   type ISanity,
 } from "../types/types";
 import { EVIDENCEVALUE } from "../types/evidenceValue";
-import { ghostSpeedFilter } from "../utils/speedUtils";
+import { ghostSpeedFilter } from "../../evidence/utils/speedUtils";
 
 const useGhosts = (args: {
   ghosts: IGhost[];
@@ -18,6 +18,7 @@ const useGhosts = (args: {
   sanityReRender: boolean;
   speed: IGhostSpeed;
   sanity: ISanity;
+  setEvidence: (id: evidence, value: IMenuEvidence["value"]) => void;
 }): [
   IClientGhost[],
   (ghostName: string, ruleOut: boolean) => void,
@@ -31,6 +32,7 @@ const useGhosts = (args: {
     speed,
     speedReRender,
     sanity,
+    setEvidence,
   } = args;
 
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
@@ -75,32 +77,62 @@ const useGhosts = (args: {
         .filter((e) => e.value === EVIDENCEVALUE.RULED_OUT)
         .map((e) => e.id);
 
+      // Check if any evidence has been selected, rule out ghosts that do not have that evidence
       let newGhosts: IClientGhost[] = ghosts.map((g) => ({
         ...g,
         ruledOut: false,
       }));
       if (confirmedEvidence.length > 0) {
+        // Rule out ghots that do not have selected evidence
         for (const e of confirmedEvidence) {
           newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
         }
       }
 
+      // Rule out ghosts that have evidence that has been ruled out
       for (const e of ruledOutEvidence) {
         newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
       }
 
+      // Rule out ghosts based on speed (BUGGED)
       for (const s of Object.values(speed)) {
         if (!s.selected) continue;
 
         newGhosts = newGhosts.filter((g) => ghostSpeedFilter(g, s));
       }
 
+      // Rule out ghosts based on hunt sanity
       for (const s of Object.values(sanity)) {
         if (s.selected === SecondaryEvidenceValue.SELECTED)
           newGhosts = newGhosts.filter(
             (g) => (g.maxHuntSanity ?? g.huntSanity) > s.minValue,
           );
       }
+
+      // Rule out evidence that is not possible
+      // if (confirmedEvidence.length > 0) {
+      const posEvidence: evidence[] = [];
+
+      for (const g of newGhosts) {
+        for (const e of g.evidence) {
+          if (!posEvidence.includes(e.evidence.id))
+            posEvidence.push(e.evidence.id);
+        }
+      }
+
+      const newEvidence = evidence;
+      for (const e of newEvidence) {
+        if (!posEvidence.includes(e.id))
+          setEvidence(e.id, EVIDENCEVALUE.IMPOSSIBLE);
+        else
+          setEvidence(
+            e.id,
+            e.value === EVIDENCEVALUE.IMPOSSIBLE
+              ? EVIDENCEVALUE.POSSIBLE
+              : e.value,
+          );
+      }
+      // }
 
       setPossibleGhosts(newGhosts);
       triggerReRender((prev) => !prev);
@@ -115,6 +147,7 @@ const useGhosts = (args: {
     speed,
     sanityReRender,
     sanity,
+    setEvidence,
   ]);
 
   return [possibleGhosts, ruleOutGhost, resetGhosts];

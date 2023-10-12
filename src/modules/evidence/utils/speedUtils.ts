@@ -1,5 +1,5 @@
 import type { IGhost } from "~/server/api/data/types";
-import type { IGhostSpeedKey } from "../types/types";
+import type { IGhostSpeedKey } from "../../ghosts/types/types";
 
 export const ghostSpeedFilter = (g: IGhost, s: IGhostSpeedKey): boolean => {
   let isPossible = false;

@@ -35,6 +35,7 @@ const AppWrapper = (): JSX.Element => {
     ghosts: initData.data?.ghosts ?? [],
     sanityReRender: reRender,
     sanity,
+    setEvidence,
   });
 
   const handleReset = () => {

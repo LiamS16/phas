@@ -43,3 +43,18 @@ export interface IMap {
   size: size;
   url: string;
 }
+
+export type CursedPossesionId =
+  | "music"
+  | "mirror"
+  | "ouija"
+  | "summoning"
+  | "tarot"
+  | "voodoo"
+  | "monkey";
+export interface ICursedPossesion {
+  id: CursedPossesionId;
+  name: string;
+  description: string;
+  image: string;
+}

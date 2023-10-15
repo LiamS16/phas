@@ -110,30 +110,29 @@ const useGhosts = (args: {
       }
 
       // Rule out evidence that is not possible
-      // if (confirmedEvidence.length > 0) {
-      const posEvidence: evidence[] = [];
+      if (process.env.NODE_ENV === "development") {
+        const posEvidence: evidence[] = [];
 
-      for (const g of newGhosts) {
-        for (const e of g.evidence) {
-          if (!posEvidence.includes(e.evidence.id))
-            posEvidence.push(e.evidence.id);
+        for (const g of newGhosts) {
+          for (const e of g.evidence) {
+            if (!posEvidence.includes(e.evidence.id))
+              posEvidence.push(e.evidence.id);
+          }
+        }
+
+        const newEvidence = evidence;
+        for (const e of newEvidence) {
+          if (!posEvidence.includes(e.id))
+            setEvidence(e.id, EVIDENCEVALUE.IMPOSSIBLE);
+          else
+            setEvidence(
+              e.id,
+              e.value === EVIDENCEVALUE.IMPOSSIBLE
+                ? EVIDENCEVALUE.POSSIBLE
+                : e.value,
+            );
         }
       }
-
-      const newEvidence = evidence;
-      for (const e of newEvidence) {
-        if (!posEvidence.includes(e.id))
-          setEvidence(e.id, EVIDENCEVALUE.IMPOSSIBLE);
-        else
-          setEvidence(
-            e.id,
-            e.value === EVIDENCEVALUE.IMPOSSIBLE
-              ? EVIDENCEVALUE.POSSIBLE
-              : e.value,
-          );
-      }
-      // }
-
       setPossibleGhosts(newGhosts);
       triggerReRender((prev) => !prev);
     };

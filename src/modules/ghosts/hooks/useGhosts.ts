@@ -37,6 +37,7 @@ const useGhosts = (args: {
 
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
   const [, triggerReRender] = useState<boolean>(false);
+  const [allGhosts, setAllGhosts] = useState<IClientGhost[]>([]);
 
   const ruleOutGhost = function (ghostName: string, ruleOut: boolean) {
     setPossibleGhosts((prevGhosts) => {
@@ -53,7 +54,9 @@ const useGhosts = (args: {
   };
 
   const resetGhosts = () => {
-    setPossibleGhosts(ghosts.map((g) => ({ ...g, ruledOut: false })));
+    const newGhosts = ghosts.map((g) => ({ ...g, ruledOut: false }));
+    setPossibleGhosts(newGhosts);
+    setAllGhosts(newGhosts);
     triggerReRender((prev) => !prev);
   };
 
@@ -67,86 +70,81 @@ const useGhosts = (args: {
       if (g.evidence.map((ev) => ev.evidence.id).includes(e)) return include;
       else return !include;
     };
+    const confirmedEvidence = evidence
+      .filter((e) => e.value === EVIDENCEVALUE.SELECTED)
+      .map((e) => e.id);
 
-    const filterGhosts = () => {
-      const confirmedEvidence = evidence
-        .filter((e) => e.value === EVIDENCEVALUE.SELECTED)
-        .map((e) => e.id);
+    const ruledOutEvidence = evidence
+      .filter((e) => e.value === EVIDENCEVALUE.RULED_OUT)
+      .map((e) => e.id);
 
-      const ruledOutEvidence = evidence
-        .filter((e) => e.value === EVIDENCEVALUE.RULED_OUT)
-        .map((e) => e.id);
+    let newGhosts: IClientGhost[] = [];
+    if (allGhosts.length === 0) {
+      const gh = ghosts.map((g) => ({ ...g, ruledOut: false }));
+      newGhosts = gh;
+      setAllGhosts(gh);
+    } else newGhosts = allGhosts;
 
-      // Check if any evidence has been selected, rule out ghosts that do not have that evidence
-      let newGhosts: IClientGhost[] = ghosts.map((g) => ({
-        ...g,
-        ruledOut: false,
-      }));
-      if (confirmedEvidence.length > 0) {
-        // Rule out ghots that do not have selected evidence
-        for (const e of confirmedEvidence) {
-          newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
-        }
+    // Check if any evidence has been selected, rule out ghosts that do not have that evidence
+    if (confirmedEvidence.length > 0) {
+      // Rule out ghots that do not have selected evidence
+      for (const e of confirmedEvidence) {
+        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, true));
       }
+    }
 
-      // Rule out ghosts that have evidence that has been ruled out
-      for (const e of ruledOutEvidence) {
-        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
+    // Rule out ghosts that have evidence that has been ruled out
+    for (const e of ruledOutEvidence) {
+      newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
+    }
+
+    // Rule out ghosts based on speed (BUGGED)
+    for (const s of Object.values(speed)) {
+      if (!s.selected) continue;
+
+      newGhosts = newGhosts.filter((g) => ghostSpeedFilter(g, s));
+    }
+
+    // Rule out ghosts based on hunt sanity
+    for (const s of Object.values(sanity)) {
+      if (s.selected === SecondaryEvidenceValue.SELECTED)
+        newGhosts = newGhosts.filter(
+          (g) => (g.maxHuntSanity ?? g.huntSanity) > s.minValue,
+        );
+    }
+
+    // Rule out evidence that is not possible
+    const posEvidence: evidence[] = [];
+
+    for (const g of newGhosts) {
+      for (const e of g.evidence) {
+        if (!posEvidence.includes(e.evidence.id))
+          posEvidence.push(e.evidence.id);
       }
+    }
 
-      // Rule out ghosts based on speed (BUGGED)
-      for (const s of Object.values(speed)) {
-        if (!s.selected) continue;
+    const newEvidence = evidence;
+    for (const e of newEvidence) {
+      if (!posEvidence.includes(e.id) && e.value !== EVIDENCEVALUE.RULED_OUT)
+        setEvidence(e.id, EVIDENCEVALUE.IMPOSSIBLE);
+      else if (e.value === EVIDENCEVALUE.IMPOSSIBLE)
+        setEvidence(e.id, EVIDENCEVALUE.POSSIBLE);
+    }
+    if (process.env.NODE_ENV === "development") {
+      console.log("loop check");
+    }
 
-        newGhosts = newGhosts.filter((g) => ghostSpeedFilter(g, s));
-      }
-
-      // Rule out ghosts based on hunt sanity
-      for (const s of Object.values(sanity)) {
-        if (s.selected === SecondaryEvidenceValue.SELECTED)
-          newGhosts = newGhosts.filter(
-            (g) => (g.maxHuntSanity ?? g.huntSanity) > s.minValue,
-          );
-      }
-
-      // Rule out evidence that is not possible
-      if (process.env.NODE_ENV === "development") {
-        const posEvidence: evidence[] = [];
-
-        for (const g of newGhosts) {
-          for (const e of g.evidence) {
-            if (!posEvidence.includes(e.evidence.id))
-              posEvidence.push(e.evidence.id);
-          }
-        }
-
-        const newEvidence = evidence;
-        for (const e of newEvidence) {
-          if (!posEvidence.includes(e.id))
-            setEvidence(e.id, EVIDENCEVALUE.IMPOSSIBLE);
-          else
-            setEvidence(
-              e.id,
-              e.value === EVIDENCEVALUE.IMPOSSIBLE
-                ? EVIDENCEVALUE.POSSIBLE
-                : e.value,
-            );
-        }
-      }
-      setPossibleGhosts(newGhosts);
-      triggerReRender((prev) => !prev);
-    };
-
-    filterGhosts();
+    setPossibleGhosts(newGhosts);
+    triggerReRender((prev) => !prev);
   }, [
+    allGhosts,
     evidence,
     ghosts,
-    ghostReRender,
-    speedReRender,
-    speed,
-    sanityReRender,
     sanity,
-    setEvidence,
+    speed,
+    speedReRender,
+    sanityReRender,
+    ghostReRender,
   ]);
 
   return [possibleGhosts, ruleOutGhost, resetGhosts];

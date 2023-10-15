@@ -27,7 +27,7 @@ const EvidenceButton = (props: IProps): JSX.Element => {
         val = EVIDENCEVALUE.RULED_OUT;
         break;
       default:
-        val = EVIDENCEVALUE.POSSIBLE;
+        val = props.value;
     }
 
     props.toggleEvidence(props.id, val);

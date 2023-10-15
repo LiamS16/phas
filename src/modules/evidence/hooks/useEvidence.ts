@@ -65,7 +65,7 @@ export const useEvidence = (
         }
       });
 
-      return newEv.sort((a, b) => (a.name > b.name ? 1 : -1));
+      return newEv;
     });
     triggerReRender((prev) => !prev);
   };

@@ -36,8 +36,6 @@ interface IProps {
 }
 
 const LeftColumn = (props: IProps): JSX.Element => {
-  const cursedPossessions = api.info.getAllCursedPossessions.useQuery();
-
   return (
     <Card className="flex h-full flex-col rounded-none border-y-0 border-l-0 bg-slate-900 px-1">
       <Accordion
@@ -87,9 +85,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
             Cursed Possessions
           </AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">
-            <CursedPossessionsWrapper
-              possessions={cursedPossessions.data ?? []}
-            />
+            <CursedPossessionsWrapper />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="maps">
@@ -105,7 +101,7 @@ const LeftColumn = (props: IProps): JSX.Element => {
       >
         Reset
       </button>
-      <p className="my-1 text-center text-xs text-blue-400">Version 0.1.1</p>
+      <p className="my-1 text-center text-xs text-blue-400">Version 0.1.2</p>
       <Info />
     </Card>
   );

@@ -21,6 +21,7 @@ import type { evidence } from "~/server/api/data/types";
 import SanityWrapper from "./SanityWrapper";
 import Info from "~/modules/misc/components/Info";
 import CursedPossessionsWrapper from "~/modules/guide/components/CursedPossessionsWrapper";
+import Maps from "~/modules/guide/components/Maps";
 
 interface IProps {
   evidence: IMenuEvidence[];
@@ -89,7 +90,9 @@ const LeftColumn = (props: IProps): JSX.Element => {
         </AccordionItem>
         <AccordionItem value="maps">
           <AccordionTrigger className="w-48 px-3">Maps</AccordionTrigger>
-          <AccordionContent className="rounded bg-slate-950 p-2"></AccordionContent>
+          <AccordionContent className="rounded bg-slate-950 p-2">
+            <Maps />
+          </AccordionContent>
         </AccordionItem>
       </Accordion>
       <div className="grow" />

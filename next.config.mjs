@@ -25,6 +25,12 @@ const config = {
         pathname: "/attachments/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "i.imgur.com",
+        pathname: "/*",
+        port: "",
+      },
     ],
   },
 };

@@ -62,9 +62,9 @@ const Maps = (): JSX.Element => {
             <DialogTrigger className="w-full rounded border py-1 text-center">
               {m.name}
             </DialogTrigger>
-            <DialogContent className="h-max max-h-screen w-full">
+            <DialogContent className="h-96 w-full">
               <h1>{m.name}</h1>
-              {process.env.NODE_ENV === "production" && (
+              {process.env.NODE_ENV === "development" && (
                 <div className="relative h-96 w-full">
                   <Image
                     src={m.url}

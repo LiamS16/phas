@@ -4,13 +4,13 @@ import { Play, TimerReset } from "lucide-react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import * as Progress from "@radix-ui/react-progress";
-import TimerMarker from "./TimerMarker";
 
 dayjs.extend(utc);
 
 interface IProps {
   seconds: number;
   title: string;
+  children: React.ReactNode;
 }
 
 const CountDown = (props: IProps): JSX.Element => {
@@ -30,7 +30,7 @@ const CountDown = (props: IProps): JSX.Element => {
               <Play className="h-4 w-4 stroke-slate-400" />
             </button>
           )}
-          <time>
+          <time className="font-mono">
             {expires !== null ? dayjs(expires).utc().format("m:ss") : "0:00"}
           </time>
         </div>
@@ -45,10 +45,7 @@ const CountDown = (props: IProps): JSX.Element => {
           />
         </Progress.Root>
         {/* Progress labels */}
-        <div className="relative -mt-2 w-full">
-          <TimerMarker label="Demon" percent={((2 / 3) * 100).toString()} />
-          <TimerMarker label="Spirit" percent="0" />
-        </div>
+        <div className="relative -mt-2 w-full">{props.children}</div>
       </div>
     </div>
   );

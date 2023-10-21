@@ -18,6 +18,7 @@ const useGhosts = (args: {
   sanityReRender: boolean;
   speed: IGhostSpeed;
   sanity: ISanity;
+  numOfEvidence: number;
   setEvidence: (id: evidence, value: IMenuEvidence["value"]) => void;
 }): [
   IClientGhost[],
@@ -33,6 +34,7 @@ const useGhosts = (args: {
     speedReRender,
     sanity,
     setEvidence,
+    numOfEvidence,
   } = args;
 
   const [possibleGhosts, setPossibleGhosts] = useState<IClientGhost[]>([]);
@@ -70,6 +72,7 @@ const useGhosts = (args: {
       if (g.evidence.map((ev) => ev.evidence.id).includes(e)) return include;
       else return !include;
     };
+
     const confirmedEvidence = evidence
       .filter((e) => e.value === EVIDENCEVALUE.SELECTED)
       .map((e) => e.id);
@@ -95,7 +98,17 @@ const useGhosts = (args: {
 
     // Rule out ghosts that have evidence that has been ruled out
     for (const e of ruledOutEvidence) {
-      newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
+      if (numOfEvidence === 3)
+        newGhosts = newGhosts.filter((g) => isGhostValid(g, e, false));
+      else {
+        newGhosts = newGhosts.filter((g) => {
+          let include = true;
+          for (const ev of g.evidence) {
+            if (ev.forced && ev.evidence.id === e) include = false;
+          }
+          return include;
+        });
+      }
     }
 
     // Rule out ghosts based on speed (BUGGED)
@@ -145,6 +158,7 @@ const useGhosts = (args: {
     speedReRender,
     sanityReRender,
     ghostReRender,
+    numOfEvidence,
   ]);
 
   return [possibleGhosts, ruleOutGhost, resetGhosts];

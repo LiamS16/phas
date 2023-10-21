@@ -20,7 +20,6 @@ import SpeedWrapper from "~/modules/toolbars/components/SpeedWrapper";
 import type { evidence } from "~/server/api/data/types";
 import SanityWrapper from "./SanityWrapper";
 import Info from "~/modules/misc/components/Info";
-import { api } from "~/utils/api";
 import CursedPossessionsWrapper from "~/modules/guide/components/CursedPossessionsWrapper";
 
 interface IProps {

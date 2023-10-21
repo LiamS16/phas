@@ -36,6 +36,7 @@ const AppWrapper = (): JSX.Element => {
     sanityReRender: reRender,
     sanity,
     setEvidence,
+    numOfEvidence,
   });
 
   const handleReset = () => {

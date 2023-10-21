@@ -129,10 +129,18 @@ const useGhosts = (args: {
     // Rule out evidence that is not possible
     const posEvidence: evidence[] = [];
 
-    for (const g of newGhosts) {
-      for (const e of g.evidence) {
-        if (!posEvidence.includes(e.evidence.id))
-          posEvidence.push(e.evidence.id);
+    if (numOfEvidence > 0) {
+      for (const g of newGhosts) {
+        for (const e of g.evidence) {
+          if (!posEvidence.includes(e.evidence.id))
+            posEvidence.push(e.evidence.id);
+        }
+      }
+    } else {
+      posEvidence.push("orbs");
+      for (const e of evidence) {
+        if (e.id === "orbs" && e.value === EVIDENCEVALUE.SELECTED)
+          newGhosts = [allGhosts.find((g) => g.name === "The Mimic")!];
       }
     }
 

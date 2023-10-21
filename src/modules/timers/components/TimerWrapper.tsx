@@ -10,6 +10,7 @@ const TimerWrapper = (): JSX.Element => {
         <TimerMarker percent="50" />
         <TimerMarker label="Spirit" percent="0" />
       </CountDown>
+      <div className="my-2 border-t" />
       <CountDown seconds={25} title="Hunt Cooldown">
         <TimerMarker label="Demon" percent="20" />
         <TimerMarker percent="0" />

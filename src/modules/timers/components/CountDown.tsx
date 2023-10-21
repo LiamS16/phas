@@ -18,7 +18,7 @@ const CountDown = (props: IProps): JSX.Element => {
 
   return (
     <div className="mb-8 flex flex-col">
-      <h2>{props.title}</h2>
+      <h2 className="text-base">{props.title}</h2>
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           {isCounting ? (

@@ -23,11 +23,11 @@ const CountDown = (props: IProps): JSX.Element => {
         <div className="flex items-center justify-between">
           {isCounting ? (
             <button onClick={endTimer}>
-              <TimerReset className="h-4 w-4 stroke-slate-400" />
+              <TimerReset className="h-5 w-5 stroke-slate-400" />
             </button>
           ) : (
             <button onClick={startTimer}>
-              <Play className="h-4 w-4 stroke-slate-400" />
+              <Play className="h-5 w-5 stroke-slate-400" />
             </button>
           )}
           <time className="font-mono">

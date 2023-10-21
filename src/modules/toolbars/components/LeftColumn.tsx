@@ -57,16 +57,18 @@ const LeftColumn = (props: IProps): JSX.Element => {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="speed">
-          <AccordionTrigger className="w-48 px-3">Speed</AccordionTrigger>
-          <AccordionContent className="rounded bg-slate-950 p-2">
-            <SpeedWrapper
-              speed={props.speed}
-              // eslint-disable-next-line @typescript-eslint/unbound-method
-              toggleGhostSpeed={props.toggleGhostSpeed}
-            />
-          </AccordionContent>
-        </AccordionItem>
+        {process.env.NODE_ENV === "development" && (
+          <AccordionItem value="speed">
+            <AccordionTrigger className="w-48 px-3">Speed</AccordionTrigger>
+            <AccordionContent className="rounded bg-slate-950 p-2">
+              <SpeedWrapper
+                speed={props.speed}
+                // eslint-disable-next-line @typescript-eslint/unbound-method
+                toggleGhostSpeed={props.toggleGhostSpeed}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        )}
         <AccordionItem value="sanity">
           <AccordionTrigger className="w-48 px-3">Hunt Sanity</AccordionTrigger>
           <AccordionContent className="rounded bg-slate-950 p-2">

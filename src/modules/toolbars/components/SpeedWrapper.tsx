@@ -5,6 +5,7 @@ import type {
   SecondaryEvidenceValue,
 } from "~/modules/ghosts/types/types";
 import SpeedButton from "./SpeedButton";
+import { useBpm } from "../hooks/useBpm";
 
 interface IProps {
   speed: IGhostSpeed;
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 const SpeedWrapper = (props: IProps): JSX.Element => {
+  const { handleTap } = useBpm();
+
   return (
     <div className="-mb-4 flex w-full flex-col gap-2 py-2">
       <div className="flex flex-col gap-2">
@@ -26,7 +29,10 @@ const SpeedWrapper = (props: IProps): JSX.Element => {
           />
         ))}
         <div className="border-t border-dotted" />
-        <button className="grid grid-cols-3 items-center rounded border border-slate-600 px-3 py-2 text-base text-slate-300">
+        <button
+          className="grid grid-cols-3 items-center rounded border border-slate-600 px-3 py-2 text-base text-slate-300"
+          onClick={handleTap}
+        >
           <span>0 m/s</span>
           Tap
           <span>0 bpm</span>
